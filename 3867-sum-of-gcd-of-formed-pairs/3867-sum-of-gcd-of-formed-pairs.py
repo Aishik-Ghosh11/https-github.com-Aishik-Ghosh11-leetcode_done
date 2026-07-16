@@ -1,19 +1,26 @@
 class Solution:
     def gcdSum(self, nums: list[int]) -> int:
-        mx = 0
-
-        for i in range(len(nums)):
-            mx = max(mx, nums[i])
-            nums[i] = gcd(mx, nums[i])
-
-        nums.sort()
-
-        left, right = 0, len(nums) - 1
-        ans = 0
-
-        while left < right:
-            ans += gcd(nums[left], nums[right])
-            left += 1
-            right -= 1
         
-        return ans
+        def gcd(a, b):
+            if b == 0:
+                return a
+            return gcd(b, a%b)
+        
+        prefixGcd = [0] * len(nums)
+        max_ele = -1
+        for i in range(len(nums)):
+            max_ele = max(nums[i], max_ele)
+            prefixGcd[i] = gcd(nums[i], max_ele)
+        
+        sortedPrefixGcd = sorted(prefixGcd)
+
+        l = 0
+        r = len(sortedPrefixGcd) - 1
+
+        res = 0
+        while (l < r):
+            res += gcd(sortedPrefixGcd[l], sortedPrefixGcd[r])
+            l += 1
+            r -= 1
+        
+        return res
