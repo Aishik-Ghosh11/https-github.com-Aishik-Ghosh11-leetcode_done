@@ -1,14 +1,11 @@
 class Solution:
-    def gcd(self, a, b):
-        while b:
-            a, b = b, a % b
-
-        return a
 
     def findGCD(self, nums: List[int]) -> int:
+        nums.sort()
+     
+        def gcd(a, b):
+            while b:
+                a, b = b, a%b
+            return a
 
-        minimum = min(nums)
-
-        maximum = max(nums)
-
-        return self.gcd(minimum, maximum)
+        return gcd(nums[0], nums[-1])
