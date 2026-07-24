@@ -1,3 +1,16 @@
 class Solution:
     def uniqueXorTriplets(self, nums: List[int]) -> int:
-        return n if (n:=len(nums))<3 else 1<<n.bit_length()
+        n = len(nums)
+        
+        if n == 2: 
+            return 2
+        
+        if n == 1:
+            return 1
+        
+        gb = 0
+        for i in nums:
+            while i >= (1 << gb):
+                gb += 1
+                
+        return max((1 << gb) - 1, n) + 1
