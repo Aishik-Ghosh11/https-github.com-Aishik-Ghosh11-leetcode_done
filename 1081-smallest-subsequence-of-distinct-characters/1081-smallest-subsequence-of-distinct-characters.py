@@ -1,17 +1,15 @@
 class Solution:
     def smallestSubsequence(self, s: str) -> str:
-        freq = Counter(s)
-        seen = set()
+        last_pos = {ch: i for i, ch in enumerate(s)}
         stack = []
-
-        for c in s:
-            freq[c] -= 1
-            if c in seen: continue
-
-            while stack and stack[-1] > c and freq[stack[-1]]:
-                seen.remove(stack.pop())
+        in_stack = set()
+        for i, ch in enumerate(s):
+            if ch in in_stack:
+                continue
             
-            stack.append(c)
-            seen.add(c)
-
-        return "".join(stack)
+            while stack and ch < stack[-1] and last_pos[stack[-1]] > i:
+                removed = stack.pop()
+                in_stack.remove(removed)
+            stack.append(ch)
+            in_stack.add(ch)
+        return ''.join(stack)
