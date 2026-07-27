@@ -1,15 +1,7 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        first = 0
-
-        second = 0
-
-        for num in nums:
-            if num >= first:
-                second = first
-                first = num
-                
-            elif num > second:
-                second = num
-        
-        return (first - 1) * (second - 1)
+        lst = []
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                lst.append((nums[i]-1)*(nums[j]-1))
+        return max(lst)
