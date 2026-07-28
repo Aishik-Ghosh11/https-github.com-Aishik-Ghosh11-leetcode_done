@@ -11,9 +11,7 @@ class Solution:
                 largest = digit
             elif digit > second:
                 second = digit
-            
+
             n //= 10
 
         return largest * second
-
-
