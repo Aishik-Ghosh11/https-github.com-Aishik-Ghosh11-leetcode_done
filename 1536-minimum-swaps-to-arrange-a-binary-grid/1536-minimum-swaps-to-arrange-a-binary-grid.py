@@ -1,34 +1,31 @@
 class Solution:
     def minSwaps(self, grid: List[List[int]]) -> int:
         n = len(grid)
-        zeros = []
-
-        for row in grid:
-            cnt = 0
-            for j in range(n - 1, -1, -1):
-                if row[j] == 0:
-                    cnt += 1    
-                else:
-                    break
-            zeros.append(cnt)
-
-        swaps = 0
-
+        maxRight = []
         for i in range(n):
-            needed = n - i - 1 
-            j = i
-            while j < n and zeros[j] < needed:
-                j += 1
-            if j == n:
+            last_idx = 0
+            for j in range(n):
+                if grid[i][j]:
+                    last_idx = j
+            maxRight.append(last_idx)
+        print(maxRight)
+        swaps = 0
+        for i in range(n):
+            required = i
+            if maxRight[i] <= required:
+                continue
+            
+            found = False
+            for j in range(i+1, n):
+                if maxRight[j] <= required:
+                    found = True
+                    break
+            
+            if not found:
                 return -1
-            while j > i:
-                zeros[j], zeros[j-1] = zeros[j-1], zeros[j]
-                j -= 1
+
+            for k in range(j, i, -1):
+                maxRight[k], maxRight[k-1] = maxRight[k-1], maxRight[k]
                 swaps += 1
         
         return swaps
-
-
-
-
-
