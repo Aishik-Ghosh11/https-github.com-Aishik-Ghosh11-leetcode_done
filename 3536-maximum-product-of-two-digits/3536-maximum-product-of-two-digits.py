@@ -1,9 +1,19 @@
 class Solution:
     def maxProduct(self, n: int) -> int:
-        m = 0
-        while n:
-            m += 1 << ((n % 10) << 2)
+        largest = 0
+        second = 0
+
+        while n > 0:
+            digit = n % 10
+
+            if digit >= largest:
+                second = largest
+                largest = digit
+            elif digit > second:
+                second = digit
+            
             n //= 10
 
-        u = (m.bit_length() - 1) >> 2
-        return u * (((m - (1 << (u << 2))).bit_length() - 1) >> 2)
+        return largest * second
+
+
