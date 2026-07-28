@@ -1,11 +1,9 @@
 class Solution:
     def findKthBit(self, n: int, k: int) -> str:
-        if n == 1:
-            return '0'
-        length = (1 << n) - 1
-        mid = length // 2 + 1
-        if k == mid:
-            return '1'
-        if k < mid:
-            return self.findKthBit(n-1, k)
-        return '1' if self.findKthBit(n-1, length - k + 1) == '0' else '0'
+        s = '0'
+        l=[]
+        for x in range(n):
+            l+=[s]
+            t=["1" if x=="0" else "0" for x in s]
+            s=s+"1"+"".join(t[::-1])
+        return l[-1][k-1]
