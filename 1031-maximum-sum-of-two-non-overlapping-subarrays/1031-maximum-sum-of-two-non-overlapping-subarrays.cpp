@@ -1,38 +1,43 @@
 class Solution {
-public: 
-    // Added prefSum as a parameter
-    int funct(vector<int>& nums, vector<int>& prefSum, int L, int M){
-        int n = nums.size();
-        int maxLeftSubSum = 0;
-        int result = 0; // Max Sum
-
-        for(int mEnd = L + M - 1; mEnd < n; mEnd++){
-            int lEnd = mEnd - M;
-            int lStartPrev = lEnd - L;
-
-            // Fixed spelling mistakes in variable names
-            int mBlockSum = prefSum[mEnd] - prefSum[lEnd];
-            int lBlockSum = prefSum[lEnd] - (lStartPrev < 0 ? 0 : prefSum[lStartPrev]);
-
-            maxLeftSubSum = max(maxLeftSubSum, lBlockSum);
-
-            // Added the missing semicolon
-            result = max(result, maxLeftSubSum + mBlockSum);
+public:
+    int helper(vector<int>& nums, int& firstLen, int secondLen, int st, int end, 
+    vector<vector<int>>& dp) {
+        if(firstLen == -1) {
+            return 0;
         }
+
+        if(dp[st][end] != -1) {
+            return dp[st][end];
+        }
+
+        int result = 0;
+        int sum = 0;
+
+        for (int i = 0, j = 0; j < nums.size(); j++) {
+            if (j == st) {
+                j = end + 1;
+                i = end + 1;
+                sum = 0;
+                if(j >= nums.size()) break;
+            }
+
+            sum += nums[j];
+
+            if ((j - i + 1) == firstLen) {
+                int secondLenMax = helper(nums, secondLen, -1, i, j, dp);
+                dp[i][j] = result = max(sum + secondLenMax, result);
+                sum -= nums[i];
+                i++;
+            }
+        }
+
         return result;
     }
-    
+
     int maxSumTwoNoOverlap(vector<int>& nums, int firstLen, int secondLen) {
         int n = nums.size();
+        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
 
-        vector<int> prefSum(n, 0);
-        prefSum[0] = nums[0];
-        for(int i = 1; i < n ; i++){
-            prefSum[i] = prefSum[i-1] + nums[i];
-        }
-
-        // Passed prefSum to funct and updated variables to match the function parameters
-        return max(funct(nums, prefSum, firstLen, secondLen), 
-                   funct(nums, prefSum, secondLen, firstLen));
+        return helper(nums, firstLen, secondLen, n, n, dp);
     }
 };
