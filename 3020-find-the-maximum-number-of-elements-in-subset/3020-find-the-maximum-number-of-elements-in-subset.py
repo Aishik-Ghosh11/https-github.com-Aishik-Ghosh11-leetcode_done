@@ -1,19 +1,24 @@
 class Solution:
     def maximumLength(self, nums: List[int]) -> int:
-        freq = Counter(nums)
-        res = (freq.pop(1, 0) - 1) | 1
+        max_cnt = 1
+        cnt = Counter(nums)
 
-        for f in freq:
-            x = f
-            sq = isqrt(x)
-            if sq * sq == x and freq.get(sq, 0) > 1:
+        for num in nums:
+            base = num
+            if base == 1:
+                max_cnt = max(cnt[base] - 1 + cnt[base]%2, max_cnt)
                 continue
-            
-            n = 0
-            while x < 31623 and freq.get(x, 0) > 1:
-                n += 2
-                x *= x
-            res = max(res, n + ((x in freq) << 1) -1)
+            k = 0
+            while cnt[base] >= 2:
+                base = base*base
+                k += 1
+            if cnt[base] == 1:
+                k += 1
+            max_cnt = max(2 * k-1, max_cnt)
         
-        return res
-        
+        return max_cnt
+
+
+
+
+
