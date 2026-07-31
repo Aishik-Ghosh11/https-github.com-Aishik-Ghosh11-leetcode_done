@@ -1,7 +1,24 @@
 class Solution:
     def minOperations(self, s: str) -> int:
-        count, n = 0, len(s)
-        for i in range(n):
-            count += (ord(s[i]) ^ i) & 1
+        """
+        :type s: str
+        :rtype: int
+        """
+        ans1 = 0
+        t = s[0]
+        for i in range(1, len(s)):
+            if s[i] == t:
+                ans1 += 1
+                t = str(1 - int(s[i]))
+            else:
+                t = s[i]
+        ans2 = 1
+        t = str(1 - int(s[0]))
+        for i in range(1, len(s)):
+            if s[i] == t:
+                ans2 += 1
+                t = str(1 - int(s[i]))
+            else:                
+                t = s[i]
+        return min(ans1, ans2)
             
-        return min(count, n - count)
