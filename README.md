@@ -45,6 +45,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0032-longest-valid-parentheses](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0032-longest-valid-parentheses) |
 | [0053-maximum-subarray](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0053-maximum-subarray) |
 | [1031-maximum-sum-of-two-non-overlapping-subarrays](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1031-maximum-sum-of-two-non-overlapping-subarrays) |
+| [3130-find-all-possible-stable-binary-arrays-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3130-find-all-possible-stable-binary-arrays-ii) |
 | [3336-find-the-number-of-subsequences-with-equal-gcd](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3336-find-the-number-of-subsequences-with-equal-gcd) |
 ## Backtracking
 |  |
@@ -161,6 +162,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Prefix Sum
 |  |
 | ------- |
+| [3130-find-all-possible-stable-binary-arrays-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3130-find-all-possible-stable-binary-arrays-ii) |
 | [3312-sorted-gcd-pair-queries](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3312-sorted-gcd-pair-queries) |
 ## Linked List
 |  |
