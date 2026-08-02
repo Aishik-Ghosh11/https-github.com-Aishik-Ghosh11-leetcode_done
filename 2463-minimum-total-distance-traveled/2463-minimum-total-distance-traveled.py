@@ -3,38 +3,39 @@ class Solution:
         robot.sort()
         factory.sort()
 
-        n, m = len(robot), len(factory)
-        INF = float('inf')
-
-        dp = [[INF]*(m+1) for _ in range(n+1)]
-
-        for j in range(m+1):
-            dp[0][j] = 0
+        # Flatten the factory positions based on their limits
+        positions = []
+        for pos, limit in factory:
+            for _ in range(limit):
+                positions.append(pos)
         
-        for j in range(1, m+1):
-            pos, limit = factory[j-1]
+        num_robots = len(robot)
+        num_positions = len(positions)
 
-            for i in range(n+1):
-                dp[i][j] = dp[i][j-1]
+        memo = [[None] * num_positions for _ in range(num_robots)]
 
-                dist = 0
-                for k in range(1, min(limit, i)+1):
-                    dist += abs(robot[i-k] - pos)
-                    dp[i][j] = min(dp[i][j], dp[i-k][j-1] + dist)
-    
-        return dp[n][m]
+        def solve(robot_idx: int, slot_idx: int) -> int:
+            # Base case 1: All robots are assigned
+            if robot_idx >= num_robots:
+                return 0
+                
+            # Base case 2: Ran out of slots, but robots still remain
+            if slot_idx >= num_positions:
+                return float("inf")
+                
+            # Return memoized result if already computed
+            if memo[robot_idx][slot_idx] is not None:
+                return memo[robot_idx][slot_idx]
+            
+            # Option 1: Take the current factory slot
+            take = abs(robot[robot_idx] - positions[slot_idx]) + solve(robot_idx + 1, slot_idx + 1)
 
+            # Option 2: Skip the current factory slot
+            skip = solve(robot_idx, slot_idx + 1)
 
+            # Assign the minimum of both choices to the memo table
+            memo[robot_idx][slot_idx] = min(take, skip)
 
-
-
-
-
-
-
-
-
-
-
-
-
+            return memo[robot_idx][slot_idx]
+            
+        return solve(0, 0)
