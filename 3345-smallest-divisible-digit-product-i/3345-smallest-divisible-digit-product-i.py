@@ -1,17 +1,19 @@
 class Solution:
-    def findDigitsProd(self, n: int) -> int:
+    def findDigitsProd(self, num: int) -> int:
         prod = 1
-        while n:
-            prod = prod * (n % 10)
-            # Early exit if product found the 0 
+        while num > 0:
+            prod = prod * (num % 10)
+            # Early exit if product hits 0
             if prod == 0:
                 return 0
-            n //= 10
-        return prod
-
+            num //= 10 
+        
+        return prod 
+        
     def smallestNumber(self, n: int, t: int) -> int:
-        for num in range(n, n+10):
+
+        for num in range(n, n + 10):
             if self.findDigitsProd(num) % t == 0:
                 return num
 
-        return-1
+        return -1
