@@ -34,6 +34,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [1758-minimum-changes-to-make-alternating-binary-string](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1758-minimum-changes-to-make-alternating-binary-string) |
 | [3014-minimum-number-of-pushes-to-type-word-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3014-minimum-number-of-pushes-to-type-word-i) |
 | [3016-minimum-number-of-pushes-to-type-word-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3016-minimum-number-of-pushes-to-type-word-ii) |
+| [3302-find-the-lexicographically-smallest-valid-sequence](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3302-find-the-lexicographically-smallest-valid-sequence) |
 | [3348-smallest-divisible-digit-product-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3348-smallest-divisible-digit-product-ii) |
 | [3499-maximize-active-section-with-trade-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3499-maximize-active-section-with-trade-i) |
 | [3501-maximize-active-section-with-trade-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3501-maximize-active-section-with-trade-ii) |
@@ -50,6 +51,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [1031-maximum-sum-of-two-non-overlapping-subarrays](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1031-maximum-sum-of-two-non-overlapping-subarrays) |
 | [2463-minimum-total-distance-traveled](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2463-minimum-total-distance-traveled) |
 | [3130-find-all-possible-stable-binary-arrays-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3130-find-all-possible-stable-binary-arrays-ii) |
+| [3302-find-the-lexicographically-smallest-valid-sequence](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3302-find-the-lexicographically-smallest-valid-sequence) |
 | [3336-find-the-number-of-subsequences-with-equal-gcd](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3336-find-the-number-of-subsequences-with-equal-gcd) |
 ## Backtracking
 |  |
@@ -130,6 +132,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0016-3sum-closest](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0016-3sum-closest) |
 | [0019-remove-nth-node-from-end-of-list](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0019-remove-nth-node-from-end-of-list) |
 | [0026-remove-duplicates-from-sorted-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0026-remove-duplicates-from-sorted-array) |
+| [3302-find-the-lexicographically-smallest-valid-sequence](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3302-find-the-lexicographically-smallest-valid-sequence) |
 | [3867-sum-of-gcd-of-formed-pairs](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3867-sum-of-gcd-of-formed-pairs) |
 ## Sorting
 |  |
@@ -222,6 +225,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [1689-partitioning-into-minimum-number-of-deci-binary-numbers](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1689-partitioning-into-minimum-number-of-deci-binary-numbers) |
 | [3014-minimum-number-of-pushes-to-type-word-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3014-minimum-number-of-pushes-to-type-word-i) |
 | [3016-minimum-number-of-pushes-to-type-word-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3016-minimum-number-of-pushes-to-type-word-ii) |
+| [3302-find-the-lexicographically-smallest-valid-sequence](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3302-find-the-lexicographically-smallest-valid-sequence) |
 | [3348-smallest-divisible-digit-product-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3348-smallest-divisible-digit-product-ii) |
 ## Monotonic Stack
 |  |
