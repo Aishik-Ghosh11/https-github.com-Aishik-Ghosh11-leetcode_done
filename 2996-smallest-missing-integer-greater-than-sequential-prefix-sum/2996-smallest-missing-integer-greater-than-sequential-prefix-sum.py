@@ -1,16 +1,16 @@
 class Solution:
-    def missingInteger(self, A: List[int]) -> int:
-        n = len(A)
-        seen = set(A)
-        sum = A[0]
+    def missingInteger(self, nums: list[int]) -> int:
+        total = nums[0]
 
-        for i in range(1, n):
-            if A[i] == A[i - 1] + 1:
-                sum += A[i]
+        for a, b in pairwise(nums):
+            if b == a + 1:
+                total += b
             else:
                 break
-        
-        while sum in seen:
-            sum += 1
-        
-        return sum
+
+        num_set = set(nums)
+
+        while total in num_set:
+            total += 1
+
+        return total
