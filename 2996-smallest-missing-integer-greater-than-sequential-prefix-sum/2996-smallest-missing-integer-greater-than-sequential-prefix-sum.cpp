@@ -1,24 +1,23 @@
 class Solution {
 public:
     int missingInteger(vector<int>& nums) {
-        int n = nums.size();
+        int sum = nums[0];
 
-        unordered_set<int> st(begin(nums), end(nums));
-
-        int sequential = nums[0];
-        for(int j = 1; j < n; j++) {
-            if(nums[j] == nums[j-1] + 1) {
-                sequential += nums[j];
-            } else {
-                break;
-            }
+        // Find the longest sequential prefix
+        int i = 1;
+        while (i < nums.size() && nums[i] == nums[i - 1] + 1) {
+            sum += nums[i];
+            i++;
         }
 
-        while(st.count(sequential)) {
-            sequential++;
-        }
+        // Store all numbers in a hash set
+        unordered_set<int> st(nums.begin(), nums.end());
 
-        return sequential;
+        // Find the smallest missing integer >= sum
+        while (st.count(sum)) {
+            sum++;
+        }
+        return sum;
     }
 };
 
