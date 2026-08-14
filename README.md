@@ -294,4 +294,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [1510-stone-game-iv](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1510-stone-game-iv) |
+## Database
+|  |
+| ------- |
+| [0175-combine-two-tables](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0175-combine-two-tables) |
 <!---LeetCode Topics End-->
