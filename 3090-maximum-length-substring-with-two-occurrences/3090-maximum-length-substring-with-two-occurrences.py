@@ -1,13 +1,18 @@
 class Solution:
     def maximumLengthSubstring(self, s: str) -> int:
-        res = l = 0
-        fq = defaultdict(int)
-        
-        for r, ch in enumerate(s):
-            fq[ch] += 1
-            while fq[ch] > 2:
-                fq[s[l]] -= 1
-                l += 1
-
-            res = max(res, r - l + 1)
-        return res
+        if len(s) <= 2:
+            return len(s)
+        else:
+            new = 0
+            for i in range(len(s)):
+                subs = s[i:]
+                for idx in range(len(subs)):
+                    if subs[:idx].count(subs[idx]) == 2:
+                        break
+                    else:
+                        longest = len(subs[:idx+1])
+                        lon_str = subs[:idx+1]
+                        print(idx, subs[:idx+1])
+                if longest > new:
+                    new = longest
+            return new
