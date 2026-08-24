@@ -1,15 +1,30 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        rows = [[False] * 9 for _ in range(9)]
-        cols = [[False] * 9 for _ in range(9)]
-        boxes = [[False] * 9 for _ in range(9)]
-
+        for row in board:
+            if not self.checker(row):
+                print("failed1", row)
+                return False
+        
         for i in range(9):
-            for j in range(9):
-                if board[i][j] != '.':
-                    num = ord(board[i][j]) - ord('1')
-                    boxIndex = (i // 3) * 3 + (j // 3)
-                    if rows[i][num] or cols[j][num] or boxes[boxIndex][num]:
-                        return False
-                    rows[i][num] = cols[j][num] = boxes[boxIndex][num] = True
+            row = [j[i] for j in board]
+            if not self.checker(row):
+                print("failed2")
+                return False
+        
+        for i in [0, 3, 6]:
+            for j in [0 , 3 , 6]:
+                row = [y for x in board[i: i+3] for y in x[j:j+3]]
+                if not self.checker(row):
+                    print("failed3")
+                    return False
         return True
+
+    def checker(self, inlist):
+        inputlist = [i for i in inlist if i != '.']
+        validset = set([str(i) for i in range(1, 10)])
+        repeatcheck = len(set(inputlist)) == len(inputlist)
+        validcheck = set(inputlist) <= validset
+        return repeatcheck and validcheck
+        
+                
+        
