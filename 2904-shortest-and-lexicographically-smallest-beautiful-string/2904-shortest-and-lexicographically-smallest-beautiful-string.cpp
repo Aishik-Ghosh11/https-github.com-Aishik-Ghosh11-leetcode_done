@@ -2,44 +2,24 @@ class Solution {
 public:
     string shortestBeautifulSubstring(string s, int k) {
         int n = s.size();
-
-        int left = 0;
-        int ones = 0;
-
-        string ans = "";
-
-        for (int right = 0; right < n; right++) {
-
-            if (s[right] == '1')
-                ones++;
-
-            // Too many ones -> move left
-            while (ones > k) {
-                if (s[left] == '1')
-                    ones--;
-
-                left++;
-            }
-
-            // We have exactly k ones
-            if (ones == k) {
-
-                // Remove unnecessary leading zeros
-                while (left < right && s[left] == '0') {
-                    left++;
-                }
-
-                string cur = s.substr(left, right - left + 1);
-
-                if (ans == "" ||
-                    cur.size() < ans.size() ||
-                    (cur.size() == ans.size() && cur < ans)) {
-
-                    ans = cur;
+        vector<string>ans;
+        int  mini = 1e9;
+        for(int i=0; i<n; i++) {
+            int count = 0;
+            string temp;
+            for(int j = i; j<n; j++) {
+                if(s[j]=='1') count++;
+                if(count<=k) temp+=s[j];
+                if(count==k){
+                    ans.push_back(temp);
+                    mini = min(mini, j-i+1);
                 }
             }
         }
-
-        return ans;
+        sort(ans.begin() , ans.end());
+        for(auto x: ans) {
+            if(x.size()==mini) return x;
+        }
+        return "";
     }
 };
