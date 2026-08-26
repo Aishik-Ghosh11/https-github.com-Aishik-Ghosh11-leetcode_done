@@ -1,24 +1,19 @@
 class Solution:
     def shortestBeautifulSubstring(self, s: str, k: int) -> str:
-        if s.count('1')<k: return ""
         n = len(s)
-        minLen, cnt1, Len=n, 0, 0
-        xMin, win = 1<<n, 0
-        l=0
-        for r, c in enumerate(s):
-            is1=c=='1'
-            win=(win<<1)|is1
-            cnt1 += is1
-            Len += 1
-
-            while cnt1 > k or (cnt1==k and s[l] == '0'):
-                win&=(1<<(Len-1))-1
-                Len -= 1
-                cnt1 -= s[l]=='1'
-                l += 1
-            if cnt1 == k:
-                if Len < minLen:
-                    minLen, xMin = Len , win
-                elif Len == minLen and win < xMin:
-                    xMin=win
-        return bin(xMin)[2:]
+        prefix = [0]*(n+1)
+        for i in range(1,n+1):
+            if s[i-1] == '1':
+                prefix[i] = prefix[i-1] + 1
+            else:
+                prefix[i] = prefix[i-1]
+        
+        res = ""
+        for j in range(1, n+1):
+            for i in range(j):
+                if prefix[j]-prefix[i] == k:
+                    if (not res) or j-i < len(res):
+                        res = s[i:j]
+                    elif j-i == len(res) and s[i:j] < res:
+                        res = s[i:j]
+        return res
