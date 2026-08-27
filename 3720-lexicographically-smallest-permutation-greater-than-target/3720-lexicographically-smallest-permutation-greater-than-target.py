@@ -1,50 +1,38 @@
+from functools import cache
 class Solution:
     def lexGreaterPermutation(self, s: str, target: str) -> str:
-        cnt = [0] * 26
-
-        for ch in s:
-            cnt[ord(ch) - ord('a')] += 1
-
-        for ch in target:
-            cnt[ord(ch) - ord('a')] -= 1
-
-        bad = 0
-        mask = 0
-
-        for c in range(26):
-            if cnt[c] < 0:
-                bad += 1
-            elif cnt[c]:
-                mask |= 1 << c
-
-        for i in range(len(target) - 1, -1, -1):
-            cur = ord(target[i]) - ord('a')
-            cnt[cur] += 1
-
-            if cnt[cur] == 0:
-                bad -= 1
-            elif cnt[cur] == 1:
-                mask |= 1 << cur
-
-            if bad:
-                continue
-
-            # Check whether a character greater than cur exists.
-            up = mask >> (cur + 1)
-            if not up:
-                continue
-
-            # Lowest set bit = smallest available larger character.
-            nxt = cur + 1 + (up & -up).bit_length() - 1
-
-            cnt[nxt] -= 1
-
-            ans = list(target[:i])
-            ans.append(chr(nxt + ord('a')))
-
-            for c in range(26):
-                ans.extend(chr(c + ord('a')) * cnt[c])
-
-            return ''.join(ans)
-
-        return ""
+        counts = [0]*26
+        for i,c in enumerate(s):
+            counts[ord(c)-ord('a')]+=1
+        @cache
+        def help(state, index):
+            if index==len(target):
+                return None
+            tc = target[index]
+            tc_ind = ord(tc)-ord('a')
+            larger_char_ind = None
+            for i in range(tc_ind+1, 26):
+                if state[i] > 0:
+                    larger_char_ind = i
+                    break
+            cand = None
+            if larger_char_ind is not None:
+                chrs = [chr(ord('a')+larger_char_ind)]
+                for i,c in enumerate(state):
+                    if i == larger_char_ind:
+                        c -= 1
+                    chrs.append(chr(ord('a')+i)*c)
+                cand = ''.join(chrs)
+            if state[tc_ind] > 0:
+                cl = list(state)
+                cl[tc_ind] -= 1
+                next_state = tuple(cl)
+                next_str = help(next_state, index+1)
+                if next_str is not None:
+                    if cand is None:
+                        cand = tc + next_str
+                    else:
+                        cand = min(cand, tc+next_str)
+            return cand
+        ans= help(tuple(counts),0)
+        return '' if ans is None else ans
