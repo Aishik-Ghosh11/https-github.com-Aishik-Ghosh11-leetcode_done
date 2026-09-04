@@ -1,48 +1,94 @@
 class Solution:
-    def lexPalindromicPermutation(self, s: str, target: str) -> str:
-        freq = Counter(s)
-        
-        def check() -> bool:
-            return all(v >= 0 for v in freq.values())
+    def isPossible(self, n, freq, cur, mid, target):
+        freq = freq[:]  # copy, since C++ passes freq by value here
 
-        center = ''
-        for x, v in freq.items():
-            if v % 2 == 0: continue
-            if center: return ""
-            center = x
-            freq[x] -= 1
+        # build the largest possible arrangement of remaining chars (descending order)
+        for i in range(25, -1, -1):
+            while freq[i]:
+                cur += chr(ord('a') + i)
+                freq[i] -= 1
 
-        sz = len(s)
-        half = sz // 2
-        for i, w in enumerate(target[:half]):
-            freq[w] -= 2
+        if mid != '#':
+            # odd-length palindrome: left half + mid + reverse(left half)
+            temp = cur
+            cur += mid
+            temp = temp[::-1]
+            cur += temp
+        else:
+            # even-length palindrome: left half + reverse(left half)
+            temp = cur
+            temp = temp[::-1]
+            cur += temp
 
-        if check():
-            head = target[:half]
-            tail = center + head[::-1]
-            if tail > target[half:]:
-                return head + tail
+        # feasibility check: only valid if this (largest possible) candidate beats target
+        return cur if cur > target else ""
 
-        for i in range(half - 1, -1, -1):
-            w = target[i]
-            freq[w] += 2
-            if not check(): continue
+    def lexPalindromicPermutation(self, s, target):
+        n = len(s)
 
-            for j in range(ord(w) - ord('a') + 1, 26):
-                x = ascii_lowercase[j]
-                if freq[x] == 0: continue
+        freq = [0] * 26
 
-                freq[x] -= 2
-                result = list(target[:i + 1])
-                result[i] = x
+        if n == 1:
+            if s > target:
+                return s
+            else:
+                return ""
 
-                for x in ascii_lowercase:
-                    result.extend(x * (freq[x] // 2))
+        for c in s:
+            freq[ord(c) - ord('a')] += 1
 
-                tail = result[::-1]
-                result.append(center)
-                result += tail
+        mid = '#'
+        oddCount = 0
 
-                return ''.join(result)
+        for i in range(26):
+            if freq[i] % 2:
+                # odd count -> this becomes the middle character
+                mid = chr(ord('a') + i)
+                freq[i] -= 1
+                oddCount += 1
 
-        return ""
+            freq[i] //= 2  # each char used freq[i]/2 times in the left half
+
+            if oddCount >= 2:
+                return ""  # more than one odd-frequency char -> can't form a palindrome
+
+        n //= 2  # we only need to construct the left half now
+
+        res, prefix = "", ""
+
+        # greedily build the left half, position by position
+        for i in range(n):
+
+            cur = prefix
+            isThereAny = False
+
+            # try smallest character first ('a' -> 'z')
+            for j in range(26):
+
+                if freq[j]:
+
+                    freq[j] -= 1
+                    cur += chr(ord('a') + j)
+
+                    # check if this prefix can still lead to a palindrome > target
+                    isPos = self.isPossible(n, freq, cur, mid, target)
+
+                    if isPos != "":
+                        prefix = cur      # keep this character, lock in the prefix
+                        isThereAny = True
+
+                        if res == "":
+                            res = isPos
+                        else:
+                            res = min(res, isPos)  # track smallest valid candidate seen
+
+                        break
+
+                    # this character doesn't work, undo and try the next one
+                    freq[j] += 1
+                    cur = cur[:-1]
+
+            if not isThereAny:
+                return ""  # no character works at this position -> impossible
+
+        return  res 
