@@ -1,15 +1,24 @@
-suf = [0] * 100
 class Solution:
-    def firstStableIndex(self, A: list[int], k: int) -> int:
-        n = len(A)
-        suf[n - 1] = A[-1]
-
-        for i in range(n - 2, -1, -1):
-            suf[i] = min(suf[i + 1], A[i])
-        mx = 0
-        for i, x in enumerate(A):
-            mx = max(mx, x)
-            if mx - suf[i] <= k:
+    def firstStableIndex(self, nums: list[int], k: int) -> int:
+        v=[nums[0]]
+        o=[]
+        h=[]
+        w=0
+        for i in range(1,len(nums)):
+            c=max(nums[0:i])
+            v.append(c)
+            p=min(nums[w:])
+            w+=1
+            o.append(p)
+        o.append(nums[len(nums)-1])    
+        for i in range(0,len(nums)):
+            c=v[i]-o[i]
+            h.append(c)
+        for i in range(0,len(nums)):  
+            if h[i] <= k:
                 return i
-        
         return -1
+       
+       
+
+        
