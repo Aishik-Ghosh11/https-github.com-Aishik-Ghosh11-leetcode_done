@@ -1,30 +1,39 @@
-class Solution:
-    def solveQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+class Solution(object):
+    def solveQueries(self, nums, queries):
+        """
+        :type nums: List[int]
+        :type queries: List[int]
+        :rtype: List[int]
+        """
         n = len(nums)
-        mp = defaultdict(list)
-
-        for i in range(n):
-            mp[nums[i]].append(i)
+        pos = defaultdict(list)
+        for i, num in enumerate(nums):
+            pos[num].append(i)
         
-        ans = []
+        hm = {}
+        for num, indices in pos.items():
+            m = len(indices)
+            if m == 1:
+                hm[indices[0]] = -1
+            else:
+                for i in range(m):
+                    curr = indices[i]
+                    left = indices[i-1]
+                    right = indices[(i + 1) % m]
+
+                    dist_left = min(abs(curr - left) , n - abs(curr - left))
+                    dist_right = min(abs(curr - right), n - abs(curr - right))
+
+                    hm[curr] = min(dist_left , dist_right)
+        answer = []
         for q in queries:
-            v = mp[nums[q]]
-
-            if len(v) == 1:
-                ans.append(-1)
-                continue
+            answer.append(hm[q])
             
-            pos = bisect_left(v, q)
-            res = float('inf')
+        return answer
 
-            left = v[(pos - 1) % len(v)]
-            d1 = abs(q - left)
-            res = min(res , min(d1, n-d1))
 
-            right = v[(pos + 1) % len(v)]
-            d2 = abs(q - right)
-            res = min(res, min(d2, n-d2))
 
-            ans.append(res)
-        
-        return ans
+
+
+
+
