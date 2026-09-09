@@ -1,13 +1,17 @@
 class Solution {
 public:
     bool uniformArray(vector<int>& A) {
-        int xmin = A[0];
-        bool odd = 0;
+        sort(A.begin(), A.end());
 
-        for (auto& x: A) {
-            xmin = min(xmin , x);
-            odd |= x & 1;
+        int oddcnt = 0;
+        int eventcnt = 0;
+
+        for (int it: A) {
+            if (it % 2 != 0) oddcnt++;
+            else eventcnt++;
         }
-        return (xmin & 1) == odd;
+        if (oddcnt == 0 || eventcnt == 0) return true;
+
+        return A[0] % 2 != 0;
     }
 };
