@@ -1,11 +1,13 @@
-class Solution:
-    def totalNumbers(self, digits: List[int]) -> int:
-        f = Counter(digits)
+from collections import Counter
+from typing import List
 
-        res = 0
-        for n in range(100, 1000, 2):
-            i, r = divmod(n, 100)
-            j, k = divmod(r, 10)
-            res += f[i] > 0 and f[j] > (i == j) and f[k] > (i == k) + (j == k)
-        
-        return res
+class Solution:
+    def totalNumbers(self, digits: List[int]) -> int:    
+        avail = Counter(digits)
+        count = 0
+        for num in range(100, 1000, 2):
+            d1, d2, d3 = num // 100, (num // 10) % 10, num % 10
+            need = Counter([d1, d2 ,d3])
+            if all(avail[d] >= c for d, c in need.items()):
+                count += 1
+        return count
