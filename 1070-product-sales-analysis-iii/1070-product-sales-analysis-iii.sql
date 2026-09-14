@@ -1,15 +1,6 @@
-SELECT 
-    product_id, 
-    year AS first_year, 
-    quantity, 
-    price
-FROM 
-    sales AS a
-WHERE 
-    (product_id, year) IN (
-        SELECT
-            product_id,
-            MIN(year)
-        FROM sales AS s
-        GROUP BY product_id
-    );
+# Write your MySQL query statement below
+SELECT a.product_id, b.first_year, a.quantity, a.price 
+FROM Sales a JOIN
+(SELECT product_id, MIN(year) as first_year
+FROM Sales
+GROUP BY product_id) b ON a.product_id=b.product_id WHERE b.first_year =a.year;
