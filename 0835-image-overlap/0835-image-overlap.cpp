@@ -1,23 +1,35 @@
 class Solution {
 public:
     int largestOverlap(vector<vector<int>>& img1, vector<vector<int>>& img2) {
+        vector<pair<int, int>> a, b;
         int n = img1.size();
-        vector<pair<int,int>> A, B;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (img1[i][j] == 1) A.emplace_back(i, j);
-                if (img2[i][j] == 1) B.emplace_back(i, j);
+
+        // Store coordinates of 1s
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (img1[i][j])
+                    a.push_back({i, j});
+                if (img2[i][j])
+                    b.push_back({i, j});
             }
         }
-        vector<vector<int>> cnt(2 * n, vector<int>(2 * n, 0));
-        int best = 0;
-        for (auto& a : A) {
-            for (auto& b : B) {
-                int dx = b.first - a.first + n;
-                int dy = b.second - a.second + n;
-                best = max(best, ++cnt[dx][dy]);
+
+        unordered_map<string, int> count;
+        int ans = 0;
+
+        // Count possible shifts
+        for (auto [x1, y1] : a) {
+            for (auto [x2, y2] : b) {
+                int dx = x2 - x1;
+                int dy = y2 - y1;
+
+                string key = to_string(dx) + "," + to_string(dy);
+
+                count[key]++;
+                ans = max(ans, count[key]);
             }
         }
-        return best;
+
+        return ans;
     }
 };
