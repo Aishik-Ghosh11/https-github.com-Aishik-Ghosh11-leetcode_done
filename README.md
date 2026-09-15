@@ -127,6 +127,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [2452-words-within-two-edits-of-dictionary](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2452-words-within-two-edits-of-dictionary) |
 | [2463-minimum-total-distance-traveled](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2463-minimum-total-distance-traveled) |
 | [2515-shortest-distance-to-target-string-in-a-circular-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2515-shortest-distance-to-target-string-in-a-circular-array) |
+| [2615-sum-of-distances](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2615-sum-of-distances) |
 | [2948-make-lexicographically-smallest-array-by-swapping-elements](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2948-make-lexicographically-smallest-array-by-swapping-elements) |
 | [2958-length-of-longest-subarray-with-at-most-k-frequency](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2958-length-of-longest-subarray-with-at-most-k-frequency) |
 | [2996-smallest-missing-integer-greater-than-sequential-prefix-sum](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2996-smallest-missing-integer-greater-than-sequential-prefix-sum) |
@@ -164,6 +165,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0037-sudoku-solver](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0037-sudoku-solver) |
 | [1331-rank-transform-of-an-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1331-rank-transform-of-an-array) |
 | [1386-cinema-seat-allocation](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1386-cinema-seat-allocation) |
+| [2615-sum-of-distances](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2615-sum-of-distances) |
 | [2958-length-of-longest-subarray-with-at-most-k-frequency](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2958-length-of-longest-subarray-with-at-most-k-frequency) |
 | [2996-smallest-missing-integer-greater-than-sequential-prefix-sum](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2996-smallest-missing-integer-greater-than-sequential-prefix-sum) |
 | [3016-minimum-number-of-pushes-to-type-word-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3016-minimum-number-of-pushes-to-type-word-ii) |
@@ -287,6 +289,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [1140-stone-game-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1140-stone-game-ii) |
 | [1872-stone-game-viii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1872-stone-game-viii) |
 | [1878-get-biggest-three-rhombus-sums-in-a-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1878-get-biggest-three-rhombus-sums-in-a-grid) |
+| [2615-sum-of-distances](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2615-sum-of-distances) |
 | [3130-find-all-possible-stable-binary-arrays-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3130-find-all-possible-stable-binary-arrays-ii) |
 | [3312-sorted-gcd-pair-queries](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3312-sorted-gcd-pair-queries) |
 | [3903-smallest-stable-index-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3903-smallest-stable-index-i) |
