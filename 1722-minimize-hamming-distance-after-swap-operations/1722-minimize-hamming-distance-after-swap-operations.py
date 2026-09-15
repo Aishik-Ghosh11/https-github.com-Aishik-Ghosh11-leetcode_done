@@ -1,48 +1,33 @@
 class Solution:
     def minimumHammingDistance(self, source: List[int], target: List[int], allowedSwaps: List[List[int]]) -> int:
         n = len(source)
-
         parent = list(range(n))
-        rank = [0] * n
 
-        def find(x):
-            if parent[x] != x:
-                parent[x] = find(parent[x])
-            return parent[x]
-        
-        def unite(a, b):
-            pa, pb = find(a), find(b)
-            if pa == pb:
-                return 
-            if rank[pa] < rank[pb]:
-                pa , pb = pb, pa
-            parent[pb] = pa
-            if rank[pa] == rank[pb]:
-                rank[pa] += 1
+        def find_parent(i):
+            while parent[i] != i:
+                i = parent[i]
+            return i
         
         for a, b in allowedSwaps:
-            unite(a, b)
-        
-        from collections import defaultdict
+            pa, pb = find_parent(a), find_parent(b)
 
-        groups = defaultdict(list)
+            if pa == pb:
+                continue
+            elif pa < pb:
+                parent[pb] = pa
+            else:
+                parent[pa] = pb
+        
+        partition = defaultdict(set)
         for i in range(n):
-            groups[find(i)].append(i)
+            partition[find_parent(i)].add(i)
         
-        ans = 0
-
-        for idxs in groups.values():
-            freq = {}
-
-            for i in idxs:
-                freq[source[i]] = freq.get(source[i], 0) + 1
-            
-            for i in idxs:
-                if freq.get(target[i], 0) > 0:
-                    freq[target[i]] -= 1
-                else:
-                    ans += 1
+        res = 0
+        for _, l in partition.items():
+            c1 = Counter(source[idx] for idx in l)
+            c2 = Counter(target[idx] for idx in l)
+            for v, f in c2.items():
+                res += max(0 , f - c1[v])
         
-        return ans
-
+        return res
 
