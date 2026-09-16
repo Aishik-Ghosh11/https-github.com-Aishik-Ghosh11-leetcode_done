@@ -1,29 +1,28 @@
 class Solution {
 public:
-    int M = 1e9 + 7;
-    int dp[1001][1001];
+    const int M = 1e9 + 7;
+    vector<vector<vector<long long>>> dp;
+    long long findans(int i , int j , int k , int n){
 
-    int numberOfSets(int n, int K) {
-        // Base Case
-        // k === 0 --> 1 (i < n)
-        for(int i=0; i<= n-1; i++) {
-            dp[0][i] = 1;
+        if(i >= n) return j == 0 && k == 0;
+
+        if(j < 0) return 0;
+
+        if(dp[i][j][k] != -1) return dp[i][j][k];
+
+        if(k == 1){
+            dp[i][j][k] = findans(i + 1 , j - 1 , 0 , n) + findans(i + 1 , j - 1 , 1 , n) + findans(i + 1 , j , 1 , n);
+        }
+        else {
+            dp[i][j][k] = findans(i + 1 , j , 0 , n) + findans(i + 1 , j , 1 , n);
         }
 
-        for(int k = 1; k <= K; k++) {
-            
-            vector<int> prevRowsum(n+1, 0);
+        return dp[i][j][k] % M;
+    }
+    int numberOfSets(int n, int k) {
 
-            for(int x = n-1; x >= 0; x--) {
-                prevRowsum[x] = (prevRowsum[x+1] + dp[k-1][x]) % M; 
-            }
+        dp.assign(n , vector<vector<long long>>(k + 1 , vector<long long>(2 , -1)));
 
-            for(int i=n-1; i >= 0; i--) {
-                int take = prevRowsum[i+1];
-                int skip = dp[k][i+1] % M;
-                dp[k][i] = (take + skip) % M;
-            }
-        }
-        return dp[K][0];
+        return findans(0 , k , 0 , n) % M;  
     }
 };
