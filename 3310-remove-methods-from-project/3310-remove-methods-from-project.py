@@ -1,53 +1,26 @@
 class Solution:
     def remainingMethods(self, n: int, k: int, invocations: List[List[int]]) -> List[int]:
-        edges = [[] for _ in range(n)]
-        in_degree = [0] * n
+        adj = [[] for _ in range(n)]
+        for a, b in invocations:
+            adj[a].append(b)
 
-        for u,v in invocations:
-            edges[u].append(v)
-            in_degree[v] += 1
+        # BFS from k
+        suspicious = set()
+        q = deque([k])
+        suspicious.add(k)
+
+        while q:
+            node = q.popleft()
+            for neighbor in adj[node]:
+                if neighbor not in suspicious:
+                    suspicious.add(neighbor)
+                    q.append(neighbor)
+
+        for a, b in invocations: 
+            if a not in suspicious and b in suspicious:
+                return list(range(n))
+
+
+        return [i for i in range(n) if i not in suspicious]
         
-        queue = collections.deque([k])
-        sus = bytearray(n)
-        sus[k] = 1
-
-        while queue:
-            u = queue.popleft()
-            for v in edges[u]:
-                in_degree[v] -= 1
-            
-                if sus[v] == 0:
-                    queue.append(v)
-                    sus[v] = 1
         
-        can_remove_all = True
-        for i in range(n):
-            if sus[i] == 1 and in_degree[i] > 0:
-                can_remove_all = False
-                break
-        
-        if not can_remove_all:
-            return list(range(n))
-        
-        return [i for i in range(n) if sus[i] == 0]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
