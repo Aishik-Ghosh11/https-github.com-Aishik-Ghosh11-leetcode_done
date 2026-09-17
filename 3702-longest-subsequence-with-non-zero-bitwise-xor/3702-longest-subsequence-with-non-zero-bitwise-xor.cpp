@@ -1,12 +1,21 @@
 class Solution {
 public:
     int longestSubsequence(vector<int>& nums) {
-        auto tot=0 , nonZero = 0;
+        int totalXor = 0;
+        bool hashNonZero = false;
 
-        for(auto& n : nums) {
-            nonZero |= n > 0;
-            tot ^= n;
+        for(int x : nums) {
+            totalXor ^= x;
+            if (x != 0) hashNonZero = true;
         }
-        return nonZero * (nums.size() - !tot);
+        int n = nums.size();
+
+        if (totalXor != 0) {
+            return n;
+        }
+        if (hashNonZero) {
+            return n-1;
+        }
+        return 0;
     }
 };
