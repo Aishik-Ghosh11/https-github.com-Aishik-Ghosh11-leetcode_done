@@ -1,87 +1,71 @@
 class Solution {
 public:
-    int minMoves(vector<string>& classroom, int energy) {
-        int m = classroom.size();
-        int n = classroom[0].size();
+    struct State {
+        int x, y, e, mask;
+    };
 
+    int minMoves(vector<string>& g, int energy) {
+        int m = g.size(), n = g[0].size();
+
+        int sx, sy;
         vector<vector<int>> id(m, vector<int>(n, -1));
-
         int k = 0;
-        int sr = 0, sc = 0;
 
-        for (int r = 0; r < m; r++) {
-            for (int c = 0; c < n; c++) {
-                if (classroom[r][c] == 'S') {
-                    sr = r;
-                    sc = c;
-                } else if (classroom[r][c] == 'L') {
-                    id[r][c] = k++;
-                }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(g[i][j]=='S') sx=i, sy=j;
+                if(g[i][j]=='L') id[i][j]=k++;
             }
         }
 
-        if (k == 0) return 0;
+        int finalMask = (1<<k)-1;
 
-        int totalMask = (1 << k) - 1;
-
-        vector<vector<vector<int>>> best(
-            m, vector<vector<int>>(n, vector<int>(1 << k, -1))
+        // visited[x][y][energy][mask]
+        vector<vector<vector<vector<int>>>> vis(
+            m, vector<vector<vector<int>>>(
+                n, vector<vector<int>>(
+                    energy+1, vector<int>(1<<k,0)
+                )
+            )
         );
 
-        struct State {
-            int r, c, mask, e, moves;
-        };
+        queue<pair<State,int>> q;
+        q.push({{sx,sy,energy,0},0});
+        vis[sx][sy][energy][0]=1;
 
-        queue<State> q;
+        int dx[4]={1,-1,0,0};
+        int dy[4]={0,0,1,-1};
 
-        best[sr][sc][0] = energy;
-        q.push({sr, sc, 0, energy, 0});
+        while(!q.empty()){
+            auto cur=q.front(); q.pop();
 
-        int dr[] = {-1, 1, 0, 0};
-        int dc[] = {0, 0, -1, 1};
+            auto [x,y,e,mask]=cur.first;
+            int dist=cur.second;
 
-        while (!q.empty()) {
-            State cur = q.front();
-            q.pop();
+            if(mask==finalMask) return dist;
 
-            for (int d = 0; d < 4; d++) {
-                int nr = cur.r + dr[d];
-                int nc = cur.c + dc[d];
+            for(int d=0;d<4;d++){
+                int nx=x+dx[d], ny=y+dy[d];
+                if(nx<0||ny<0||nx>=m||ny>=n) continue;
+                if(g[nx][ny]=='X') continue;
 
-                if (nr < 0 || nr >= m || nc < 0 || nc >= n)
-                    continue;
+                int ne=e-1;
+                if(ne<0) continue;
 
-                if (classroom[nr][nc] == 'X')
-                    continue;
+                if(g[nx][ny]=='R') ne=energy;
 
-                int ne = cur.e - 1;
-
-                if (ne < 0)
-                    continue;
-
-                int nmask = cur.mask;
-
-                if (classroom[nr][nc] == 'R') {
-                    ne = energy;
+                int nmask=mask;
+                if(g[nx][ny]=='L'){
+                    nmask |= (1<<id[nx][ny]);
                 }
 
-                if (classroom[nr][nc] == 'L') {
-                    nmask |= (1 << id[nr][nc]);
+                if(!vis[nx][ny][ne][nmask]){
+                    vis[nx][ny][ne][nmask]=1;
+                    q.push({{nx,ny,ne,nmask},dist+1});
                 }
-
-                if (nmask == totalMask) {
-                    return cur.moves + 1;
-                }
-
-                if (ne <= best[nr][nc][nmask])
-                    continue;
-
-                best[nr][nc][nmask] = ne;
-
-                q.push({nr, nc, nmask, ne, cur.moves + 1});
             }
         }
-        
+
         return -1;
     }
 };
