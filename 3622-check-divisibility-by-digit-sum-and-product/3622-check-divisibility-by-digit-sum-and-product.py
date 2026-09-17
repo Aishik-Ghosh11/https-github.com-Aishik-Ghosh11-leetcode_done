@@ -1,8 +1,26 @@
 class Solution:
     def checkDivisibility(self, n: int) -> bool:
-        s, p, x = 0 , 1, n
-        while x>0:
-            x, r = divmod(x, 10)
-            s += r
-            p *= r
-        return n%(s+p)==0
+
+        def digitSum(val):
+            s=0
+            while val:
+                r = val % 10
+                s += r
+                val //= 10
+
+            return s
+        
+        def digitprod(val):
+            p=1
+            while val:
+                r = val%10
+                p *= r
+                val //= 10
+            
+            return p
+        
+        s = digitprod(n) + digitSum(n)
+        if n%s==0:
+            return True
+        return False
+
