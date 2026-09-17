@@ -1,77 +1,37 @@
 from typing import List
+from functools import cache
+from itertools import accumulate
 
 class Solution:
     def stoneGameV(self, stoneValue: List[int]) -> int:
-        n = len(stoneValue)
+        s=list(accumulate(stoneValue,initial=0))
 
-        prefix = [0] * (n + 1)
+        @cache
+        def dfs(i,j):
+            if i>=j:
+                return 0
 
-        for i in range(n):
-            prefix[i + 1] = prefix[i] + stoneValue[i]
+            ans=0
+            l=0
+            r=s[j+1]-s[i]
 
-        dp = [[0] * n for _ in range(n)]
+            for k in range(i,j):
+                l+=stoneValue[k]
+                r-=stoneValue[k]
 
-        left_best = [[0] * n for _ in range(n)]
+                if l<r:
+                    if ans>=l*2:
+                        continue
+                    ans=max(ans,l+dfs(i,k))
 
-        right_best = [[0] * n for _ in range(n)]
-
-        left_ptr = [0] * n
-
-        right_ptr = list(range(n))
-
-        for i in range(n):
-            left_best[i][i] = stoneValue[i]
-            right_best[i][i] = stoneValue[i]
-
-            left_ptr[i] = i - 1
-
-            right_ptr[i] = i
-
-        for length in range(2, n + 1):
-            for l in range(n - length + 1):
-                r = l + length - 1
-
-                total = prefix[r + 1] - prefix[l]
-
-                while left_ptr[l] + 1 <= r - 1:
-                    k = left_ptr[l] + 1
-                    left_sum = prefix[k + 1] - prefix[l]
-
-                    if 2 * left_sum > total:
+                elif l>r:
+                    if ans>=r*2:
                         break
+                    ans=max(ans,r+dfs(k+1,j))
 
-                    left_ptr[l] += 1
+                else:
+                    ans=max(ans,l+dfs(i,k),r+dfs(k+1,j))
 
-                while right_ptr[l] <= r - 1:
-                    k = right_ptr[l]
-                    left_sum = prefix[k + 1] - prefix[l]
+            return ans
 
-                    if 2 * left_sum >= total:
-                        break
-
-                    right_ptr[l] += 1
-
-                best = 0
-
-                if left_ptr[l] >= l:
-                    best = left_best[l][left_ptr[l]]
-
-                if right_ptr[l] <= r - 1:
-                    best = max(
-                        best,
-                        right_best[right_ptr[l] + 1][r]
-                    )
-
-                dp[l][r] = best
-
-                left_best[l][r] = max(
-                    left_best[l][r - 1],
-                    dp[l][r] + total
-                )
-
-                right_best[l][r] = max(
-                    right_best[l + 1][r],
-                    dp[l][r] + total
-                )
-
-        return dp[0][n - 1]
+        return dfs(0,len(stoneValue)-1)
