@@ -42,6 +42,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0940-distinct-subsequences-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0940-distinct-subsequences-ii) |
 | [1081-smallest-subsequence-of-distinct-characters](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1081-smallest-subsequence-of-distinct-characters) |
 | [1320-minimum-distance-to-type-a-word-using-two-fingers](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1320-minimum-distance-to-type-a-word-using-two-fingers) |
+| [1520-maximum-number-of-non-overlapping-substrings](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1520-maximum-number-of-non-overlapping-substrings) |
 | [1545-find-kth-bit-in-nth-binary-string](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1545-find-kth-bit-in-nth-binary-string) |
 | [1689-partitioning-into-minimum-number-of-deci-binary-numbers](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1689-partitioning-into-minimum-number-of-deci-binary-numbers) |
 | [1758-minimum-changes-to-make-alternating-binary-string](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1758-minimum-changes-to-make-alternating-binary-string) |
@@ -179,6 +180,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [1331-rank-transform-of-an-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1331-rank-transform-of-an-array) |
 | [1386-cinema-seat-allocation](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1386-cinema-seat-allocation) |
 | [1477-find-two-non-overlapping-sub-arrays-each-with-target-sum](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1477-find-two-non-overlapping-sub-arrays-each-with-target-sum) |
+| [1520-maximum-number-of-non-overlapping-substrings](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1520-maximum-number-of-non-overlapping-substrings) |
 | [2615-sum-of-distances](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2615-sum-of-distances) |
 | [2958-length-of-longest-subarray-with-at-most-k-frequency](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2958-length-of-longest-subarray-with-at-most-k-frequency) |
 | [2996-smallest-missing-integer-greater-than-sequential-prefix-sum](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2996-smallest-missing-integer-greater-than-sequential-prefix-sum) |
@@ -250,6 +252,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0628-maximum-product-of-three-numbers](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0628-maximum-product-of-three-numbers) |
 | [1331-rank-transform-of-an-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1331-rank-transform-of-an-array) |
 | [1464-maximum-product-of-two-elements-in-an-array](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1464-maximum-product-of-two-elements-in-an-array) |
+| [1520-maximum-number-of-non-overlapping-substrings](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1520-maximum-number-of-non-overlapping-substrings) |
 | [1878-get-biggest-three-rhombus-sums-in-a-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1878-get-biggest-three-rhombus-sums-in-a-grid) |
 | [2463-minimum-total-distance-traveled](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2463-minimum-total-distance-traveled) |
 | [2948-make-lexicographically-smallest-array-by-swapping-elements](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/2948-make-lexicographically-smallest-array-by-swapping-elements) |
@@ -373,6 +376,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0055-jump-game](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0055-jump-game) |
 | [1081-smallest-subsequence-of-distinct-characters](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1081-smallest-subsequence-of-distinct-characters) |
 | [1386-cinema-seat-allocation](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1386-cinema-seat-allocation) |
+| [1520-maximum-number-of-non-overlapping-substrings](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1520-maximum-number-of-non-overlapping-substrings) |
 | [1536-minimum-swaps-to-arrange-a-binary-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1536-minimum-swaps-to-arrange-a-binary-grid) |
 | [1689-partitioning-into-minimum-number-of-deci-binary-numbers](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1689-partitioning-into-minimum-number-of-deci-binary-numbers) |
 | [1927-sum-game](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1927-sum-game) |
