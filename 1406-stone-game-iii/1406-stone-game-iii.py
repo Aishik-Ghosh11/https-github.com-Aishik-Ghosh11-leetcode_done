@@ -1,21 +1,22 @@
 class Solution:
-    s = ["Bob" , "Tie", "Alice"]
     def stoneGameIII(self, A: list[int]) -> str:
         n = len(A)
+        dp = [0] * (n + 1)
 
-        @cache
-        def maxDiff(i: int) -> int:
-            if i == n: return 0
-            a = b = c = -5e7
+        for i in range(n - 1, -1, -1):
+            best = float('-inf')
+            total = 0
 
-            if i < n:
-                a = A[i] - maxDiff(i + 1)
-            if i + 1 < n:
-                b = A[i] + A[i + 1] - maxDiff(i + 2)
-            if i + 2 < n:
-                c = A[i] + A[i + 1] + A[i + 2] - maxDiff(i + 3)
-            
-            return max(a, b , c)
-
-        d = maxDiff(0)
-        return self.s[(d > 0) - (d < 0) + 1]
+            for k in range(3):
+                if i + k >= n:
+                    break
+                total += A[i + k]
+                best = max(best, total - dp[i + k + 1])
+            dp[i] = best
+        
+        if dp[0] > 0:
+            return "Alice"
+        elif dp[0] < 0:
+            return "Bob"
+        else:
+            return "Tie"
