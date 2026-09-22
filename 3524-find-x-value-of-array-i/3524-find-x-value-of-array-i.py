@@ -1,21 +1,36 @@
+from typing import List
+from functools import cache
+
 class Solution:
-    def resultArray(self, A: List[int], k: int) -> List[int]:
-        res = freq = [0] * k
+    def resultArray(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
 
-        for n in A:
-            n %= k
-            cur = [0] * k
-            cur[n] = 1
+        for i in range(n):
+            nums[i] %= k
 
-            for x, y in enumerate(freq):
-                cur[x * n % k] += y
-            
-            freq = cur
-            for x, y in enumerate(freq):
-                res[x] += y
-        
-        return res
+        @cache
+        def go(index, remainder):
+            if index == n:
+                current = [0] * k
+                current[remainder] += 1
+                return current
 
+            # Mantém o resto sempre entre 0 e k - 1
+            new_remainder = (remainder * nums[index]) % k
 
+            further = go(index + 1, new_remainder)
 
+            current = further[:]
+            current[remainder] += 1
 
+            return current
+
+        total = [0] * k
+
+        for i in range(n):
+            further = go(i + 1, nums[i])
+
+            for j in range(k):
+                total[j] += further[j]
+
+        return total
