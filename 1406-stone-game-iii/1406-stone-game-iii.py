@@ -1,22 +1,33 @@
 class Solution:
-    def stoneGameIII(self, A: list[int]) -> str:
-        n = len(A)
-        dp = [0] * (n + 1)
+    def solve(self,index,dp,stone):
+        l=len(stone)
+        if index>=len(stone):
+            return 0
+        if dp[index]!=-1:
+            return dp[index]
 
-        for i in range(n - 1, -1, -1):
-            best = float('-inf')
-            total = 0
+        #3cases to be considered
+        #take 1 from left
+        #take 2 from left
+        #take 3 from left
+        take1=take2=take3=float('-inf')
+        take1=stone[index]+min(self.solve(index+2,dp,stone),self.solve(index+3,dp,stone),self.solve(index+4,dp,stone))
+        if index+1<l:
+            take2=stone[index]+stone[index+1]+min(self.solve(index+3,dp,stone),self.solve(index+4,dp,stone),self.solve(index+5,dp,stone))
+        if index+2<l:
+            take3=stone[index]+stone[index+1]+stone[index+2]+min(self.solve(index+4,dp,stone),self.solve(index+5,dp,stone),self.solve(index+6,dp,stone))
+        dp[index]=max(take1,take2,take3)
+        return dp[index]
 
-            for k in range(3):
-                if i + k >= n:
-                    break
-                total += A[i + k]
-                best = max(best, total - dp[i + k + 1])
-            dp[i] = best
-        
-        if dp[0] > 0:
+
+
+    def stoneGameIII(self, stonevalue: List[int]) -> str:
+        dp=[-1 for _ in range(len(stonevalue))]
+        alice=self.solve(0,dp,stonevalue)
+        bob=sum(stonevalue)-alice
+        if alice>bob:
             return "Alice"
-        elif dp[0] < 0:
-            return "Bob"
-        else:
+        elif alice==bob:
             return "Tie"
+        return "Bob"
+        
