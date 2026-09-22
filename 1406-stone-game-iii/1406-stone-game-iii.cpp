@@ -1,29 +1,20 @@
 class Solution {
 public:
-    static constexpr int MIN = -50000001;
-    static inline string s[] = {"Bob", "Tie", "Alice"};
-
     string stoneGameIII(vector<int>& A) {
         int n = A.size();
-        vector<int> dp(n, MIN);
+        vector<vector<int>> dp(n + 1, vector<int>(2, 0));
 
-        auto maxDiff = [&](this auto&& maxDiff, int i) -> int {
-            if (i == n) return 0;
-
-            int& res = dp[i];
-            if (res != MIN) return res;
-
-            int sum = 0;
-
-            for (int j = 1; j <= 3 && i + j <= n; j++) {
-                sum += A[i + j - 1];
-                res = max(res, sum - maxDiff(i + j));
+        for (int i=n-1; i >= 0; i--) {
+            for (int p=0; p <= 1; p++) {
+                int moveScore = 0;
+                dp[i][p] = p ? INT_MIN : INT_MAX;
+                for (int j=i; j <= min(i + 2, n-1); j++) {
+                    moveScore += A[j];
+                    if (p) dp[i][1] = max(dp[i][1], dp[j+1][0] + moveScore);
+                    else dp[i][0] = min(dp[i][0], dp[j + 1][1] - moveScore);
+                }
             }
-
-            return res;
-        };
-
-        int d = maxDiff(0);
-        return s[(d > 0) - (d < 0) + 1];
+        }
+        return dp[0][1] > 0 ? "Alice" : dp[0][1] < 0 ? "Bob" : "Tie";
     }
 };
