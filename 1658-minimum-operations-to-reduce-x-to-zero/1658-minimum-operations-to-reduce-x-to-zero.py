@@ -1,20 +1,55 @@
 class Solution:
-    def minOperations(self, nums: list[int], x: int) -> int:
-        k = sum(nums) - x
-        if k < 0: return -1
-        best = -1
+    def minOperations(self, A: list[int], x: int) -> int:
+        n = len(A)
+        target = sum(A) - x
 
-        s = i = 0
+        if target < 0:
+            return -1
+        
+        start = end = 0
+        res = -1
 
-        for j, num in enumerate(nums):
-            s += num
-            while s > k:
-                s -= nums[i]
-                i += 1
-            if s == k:
-                best = max(best, j-i+1)
+        total = 0
+
+        while end < n:
+            total += A[end]
+
+            while total > target:
+                total -= A[start]
+                start += 1
             
-        return -1 if best < 0 else len(nums) - best
+            if total == target:
+                res = max(res, end - start + 1)
+            
+            end += 1
+        
+        if res == -1:
+            return -1
+        
+        return n-res
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
