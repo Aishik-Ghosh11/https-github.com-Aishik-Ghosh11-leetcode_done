@@ -2,70 +2,50 @@ class Solution:
     def findMaxPathScore(self, edges: List[List[int]], online: List[bool], k: int) -> int:
         n = len(online)
 
-        graph = [[] for _ in range(n)]
-        indegree = [0] * n
 
-        for u, v, w in edges:
-            graph[u].append((v, w))
-            indegree[v] += 1
+        def buildAdjacencyList() -> List[List[int]]:
+            adj = [[] for _ in range(n)]
+            for [u, v, cost] in edges:
+                if online[u] and online[v]:
+                    adj[u].append((v, cost))
+            return adj
+        
+        def canReachNWithMinEdge(minEdge: int, adj: List[List[int]]) -> bool:
+            cache = {}
+            def dfs(node: int) -> int:
+                if node in cache:
+                    return cache[node]
+                if node == n - 1:
+                    return 0
+                minVal = math.inf
 
-        from collections import deque
-
-        q = deque()
-
-        for i in range(n):
-            if indegree[i] == 0:
-                q.append(i)
-
-        topo = []
-
-        while q:
-            u = q.popleft()
-            topo.append(u)
-
-            for v, _ in graph[u]:
-                indegree[v] -= 1
-                if indegree[v] == 0:
-                    q.append(v)
-
-        def check(limit):
-            INF = 10 ** 30
-
-            dp = [INF] * n
-            dp[0] = 0
-
-            for u in topo:
-
-                if dp[u] == INF:
-                    continue
-
-                if u != 0 and u != n - 1 and not online[u]:
-                    continue
-
-                for v, w in graph[u]:
-
-                    if w < limit:
+                for [neighbor, cost] in adj[node]:
+                    if cost < minEdge:
                         continue
-
-                    if v != n - 1 and not online[v]:
-                        continue
-
-                    if dp[u] + w < dp[v]:
-                        dp[v] = dp[u] + w
-
-            return dp[-1] <= k
-
-        left = 0
-        right = 10 ** 9
+                    val = dfs(neighbor)
+                    if cost + val <= k:
+                        minVal = min(minVal, cost + val)
+                cache[node] = minVal
+                return minVal
+            
+            return dfs(0) != math.inf
+        
+        adj = buildAdjacencyList()
         ans = -1
+        lower = 0
+        upper = 1e9
 
-        while left <= right:
-            mid = (left + right) // 2
-
-            if check(mid):
+        while (lower <= upper):
+            mid = (lower + upper) // 2
+            if canReachNWithMinEdge(mid, adj):
                 ans = mid
-                left = mid + 1
+                lower = mid + 1
             else:
-                right = mid - 1
+                upper = mid - 1
+        
+        return int(ans)
 
-        return ans
+
+
+
+        
