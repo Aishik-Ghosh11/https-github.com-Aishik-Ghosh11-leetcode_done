@@ -1,40 +1,55 @@
+from collections import deque
+import heapq
 class Solution:
-    dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
-
-    def maximumSafenessFactor(self, A: List[List[int]]) -> int:
-        if A[0][0] or A[-1][-1]: return 0
-        n, q = len(A), deque()
-
-        for i in range(n):
+    def maximumSafenessFactor(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        def man_dist(p1,p2):
+            return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+        safeness = [[0 for _ in range(n)] for i in range(n)]
+        dirs = [(1,0),(-1,0), (0,1), (0,-1)]
+        def isFeasible(x,y):
+            return 0<=x<=n-1 and 0<=y<=n-1 
+        seen = set()
+        queue = deque()
+        for i in range(n): # (n^2)
             for j in range(n):
-                if A[i][j]:
-                    q.append((i, j))
+                if grid[i][j] == 1:
+                    queue.append((i,j,0))
+                    seen.add((i,j))
+                    safeness[i][j] = 0
+        while queue: # this costs (n^2)
+            x, y, dist = queue.popleft()
+            for dx, dy in dirs:
+                x2 = x + dx
+                y2 = y + dy
+                if isFeasible(x2,y2) and (x2,y2) not in seen:
+                    seen.add((x2,y2))
+                    safeness[x2][y2] = dist + 1
+                    queue.append((x2,y2,dist+1))
 
-        while q:
-            i, j = q.popleft()
-            v = A[i][j]
+        # let's do djikstra
 
-            for dx, dy in self.dirs:
-                x, y = i + dx, j + dy
+        sources = {(0,0): safeness[0][0]}
+        heap = [(-safeness[0][0],0,0)]    
+        heapq.heapify(heap)
 
-                if min(x, y) >= 0 and max(x, y) < n and not A[x][y]:
-                    A[x][y] = v + 1
-                    q.append((x, y))
-
-        pq = [(-A[0][0], 0, 0)]
-
-        while pq:
-            sf, i, j = heapq.heappop(pq)
-            sf = -sf
-
-            if i == n - 1 and j == n - 1:
-                return sf - 1
-
-            for dx, dy in self.dirs:
-                x, y = i + dx, j + dy
-
-                if min(x, y) >= 0 and max(x, y) < n and A[x][y] > 0:
-                    heapq.heappush(pq, (-min(sf, A[x][y]), x, y))
-                    A[x][y] *= -1
-
-        return A[n - 1][n - 1] - 1
+        while heap:
+            dist, x, y = heapq.heappop(heap)
+            dist = -dist
+            if dist < sources[(x,y)]:
+                continue
+            for dx,dy in dirs:
+                x2 = x + dx
+                y2 = y + dy
+                if isFeasible(x2,y2):
+                    d_new = min(dist, safeness[x2][y2])
+                    if d_new > sources.get((x2,y2), float("-inf")):
+                        sources[(x2,y2)] = d_new
+                        heapq.heappush(heap,(-d_new,x2,y2))
+        
+        return sources[(n-1,n-1)]
+        
+        
+        
+            
+        
