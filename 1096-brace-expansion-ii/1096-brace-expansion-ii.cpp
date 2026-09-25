@@ -1,40 +1,65 @@
 class Solution {
 public:
     vector<string> braceExpansionII(string expression) {
-        int i=0;
-        set<string> res = parse(expression, i);
-        return vector<string> (res.begin(), res.end());
+        set<string> result = parse(expression);
+        return vector<string>(result.begin(), result.end());
     }
+
 private:
-    set<string> parse(const string& expr, int& i) {
-        set<string> res;
-        set<string> cur{""};
-        while (i < expr.size() && expr[i] != '}') {
-            if (expr[i] == '{') {
-                ++i;
-                set<string> next = parse(expr, i);
-                ++i;
-                cur = product(cur , next);
-            } else if (expr[i] == ','){
-                res.insert(cur.begin(), cur.end());
-                cur = {""};
-                ++i;
-            } else {
-                set<string> next{string(1, expr[i])};
-                ++i;
-                cur = product(cur , next);
+    set<string> parse(string s) {
+        stack<set<string>> st;
+        stack<char> ops;
+        int n = s.size();
+
+        for (int i = 0; i < n; ++i) {
+            if (isalpha(s[i])) {
+                set<string> cur = {string(1, s[i])};
+                st.push(cur);
+            } else if (s[i] == '{') {
+                ops.push('{');
+            } else if (s[i] == '}') {
+                while (!ops.empty() && ops.top() != '{') {
+                    merge(st, ops.top());
+                    ops.pop();
+                }
+                ops.pop(); // remove '{'
+            } else if (s[i] == ',') {
+                while (!ops.empty() && ops.top() == '*') {
+                    merge(st, ops.top());
+                    ops.pop();
+                }
+                ops.push('+');
+            }
+
+            // implicit concatenation
+            if (i + 1 < n && (isalpha(s[i]) || s[i] == '}') &&
+                (isalpha(s[i + 1]) || s[i + 1] == '{')) {
+                ops.push('*');
             }
         }
-        res.insert(cur.begin(), cur.end());
-        return res;
+
+        while (!ops.empty()) {
+            merge(st, ops.top());
+            ops.pop();
+        }
+
+        return st.top();
     }
-    set<string> product(const set<string>& a, const set<string>& b) {
+
+    void merge(stack<set<string>>& st, char op) {
+        auto b = st.top(); st.pop();
+        auto a = st.top(); st.pop();
         set<string> res;
-        for (const string& x: a) {
-            for (const string& y : b) {
-                res.insert(x + y);
-            }
+
+        if (op == '+') {
+            res = a;
+            res.insert(b.begin(), b.end());
+        } else if (op == '*') {
+            for (auto& x : a)
+                for (auto& y : b)
+                    res.insert(x + y);
         }
-        return res;
+
+        st.push(res);
     }
 };
