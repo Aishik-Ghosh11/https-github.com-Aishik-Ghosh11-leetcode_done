@@ -3,24 +3,20 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> res;
         vector<int> comb;
-        makeCombination(candidates, target, 0, comb, 0, res);
-        return res;        
+        dfs(0, res, 0, target, comb, candidates);
+        return res;
     }
-
-private:
-    void makeCombination(std::vector<int>& candidates, int target, int idx, vector<int>& comb, int total, vector<vector<int>>& res) {
-        if (total == target) {
+    void dfs(int i, vector<vector<int>>& res, int sum, int target, vector<int>& comb, vector<int>& candidates) {
+        if(sum==target) {
             res.push_back(comb);
             return;
         }
-
-        if (total > target || idx >= candidates.size()) {
+        if(i>=candidates.size() || sum>target) {
             return;
         }
-
-        comb.push_back(candidates[idx]);
-        makeCombination(candidates, target, idx, comb, total + candidates[idx], res);
+        comb.push_back(candidates[i]);
+        dfs(i, res, sum+candidates[i], target, comb, candidates);
         comb.pop_back();
-        makeCombination(candidates, target, idx + 1, comb, total, res);
-    }    
+        dfs(i+1, res, sum, target, comb, candidates);
+    }
 };
