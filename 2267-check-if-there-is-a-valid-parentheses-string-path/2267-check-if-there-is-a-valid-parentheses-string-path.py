@@ -1,21 +1,3 @@
 class Solution:
-    def hasValidPath(self, A: list[list[str]]) -> bool:
-        m, n = len(A), len(A[0])
-
-        if ~(m + n) & 1 or A[0][0] == ")" or A[-1][-1] == "(":
-            return False
-
-        @cache
-        def dfs(i, j, x):
-            x += 1 - ((ord(A[i][j]) & 1) << 1)
-
-            if x < 0 or x > (m + n - 1) - (i + j):
-                return False
-
-            if i == m - 1 and j == n - 1:
-                return x == 0
-
-            return (i < m - 1 and dfs(i + 1, j, x)) or \
-                   (j < n - 1 and dfs(i, j + 1, x))
-
-        return dfs(0, 0, 0)
+    def hasValidPath(self, g: List[List[str]]) -> bool:
+        return(f:=cache(lambda x,y,k,m=len(g),n=len(g[0]):x<m*(y<n)and(v:=k+(g[x][y]<')')*2-1)>0 and(f(x+1,y,v)|f(x,y+1,v)or x+y+4>m+n+v)))(0,0,1)
