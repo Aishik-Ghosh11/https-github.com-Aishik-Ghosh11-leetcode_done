@@ -1,22 +1,26 @@
 class Solution {
 public:
-    bool isMatch(string s, string p) {
-        int n = s.length(), m = p.length();
-        bool dp[n+1][m+1];
-        memset(dp, false, sizeof(dp));
-        dp[0][0] = true;
-        
-        for(int i=0; i<=n; i++){
-            for(int j=1; j<=m; j++){
-                if(p[j-1] == '*'){
-                    dp[i][j] = dp[i][j-2] || (i > 0 && (s[i-1] == p[j-2] || p[j-2] == '.') && dp[i-1][j]);
-                }
-                else{
-                    dp[i][j] = i > 0 && dp[i-1][j-1] && (s[i-1] == p[j-1] || p[j-1] == '.');
-                }
-            }
+    bool help(int i , string &s , int j , string & p ){
+        if (i==s.size() && j==p.size()) return true ;
+        if (j==p.size()) return false ;
+
+        if (i==s.size()){
+            while(j+1<p.size() && p[j+1]=='*') j+=2;
+            if (j==p.size()) return true;
+            return false;
         }
-        
-        return dp[n][m];
+
+        if (j+1<p.size() && p[j+1]=='*'){
+            bool skip =help(i, s, j+2, p);
+            bool take=false ;
+            if (s[i]==p[j] || p[j]=='.' )  take=help(i+1, s, j , p);
+            return skip||take;
+        }
+        if (s[i]==p[j] || p[j]=='.') return help(i+1  , s, j+1 , p);
+
+        return false ;
+    }
+    bool isMatch(string s, string p) {
+        return help(0 , s, 0 , p);
     }
 };
