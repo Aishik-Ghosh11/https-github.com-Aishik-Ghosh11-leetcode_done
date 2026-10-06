@@ -1,3 +1,6 @@
+def valid(num, target):
+    if -target <= num <= target : return True
+    
 class Solution:
     def maximumJumps(self, nums: List[int], target: int) -> int:
         n = len(nums)
