@@ -1,16 +1,29 @@
 class Solution {
 public:
-    bool checkValidString(string s) {
-        int l=0 , h=0;
-
-        for (auto& c : s) {
-            l += ((c == '(') << 1) -1;
-            h += ((c != ')') << 1) -1;
-
-            if (h < 0) return 0;
-
-            l = max(l, 0);
+    bool find(string &s, int ind, int state, map<pair<int, int>,bool>&m){
+        if (ind == s.size()) {
+            return !state;
         }
-        return l == 0;
+        if(m.find({state, ind}) != m.end()) return m[{state, ind}];
+        if (s[ind] == '(') {
+            if (find(s, ind + 1, state + 1, m)) return true;
+        } else if (s[ind] == ')') {
+            if(!state) return false;
+            if(find(s, ind + 1, state - 1, m)) return true;
+        }
+        else {
+            if (find(s, ind + 1, state + 1, m)) return true;
+            if (find(s , ind + 1, state, m)) return true;
+            if (state) {
+                if (find(s , ind + 1, state - 1, m)) return true;
+            }
+        }
+        m[{state, ind}] = false;
+        return false;
+    }
+    bool checkValidString(string s) {
+        map<pair<int, int>, bool>m;
+        if (find(s, 0, 0, m)) return true;
+        return false;
     }
 };
