@@ -1,7 +1,29 @@
 class Solution:
-    def minimumEffort(self, tasks: list[list[int]]) -> int:
-        tasks.sort(key=lambda x:x[1] - x[0])
-        ans = 0
-        for task in tasks:
-            ans = max(ans + task[0] , task[1])
-        return ans
+    def minimumEffort(self, shop: list[list[int]]) -> int:
+        shop.sort(key=lambda x: x[1] - x[0], reverse=True)
+
+        start = shop[0][1]
+        bal = shop[0][1] - shop[0][0]
+        loan = 0
+
+        for i in range(1, len(shop)):
+            const, thresh = shop[i]
+
+            if bal < thresh:
+                loan += thresh - bal
+                bal = thresh
+
+            bal -= const
+
+        return start + loan
+
+
+
+
+
+
+
+
+
+
+
