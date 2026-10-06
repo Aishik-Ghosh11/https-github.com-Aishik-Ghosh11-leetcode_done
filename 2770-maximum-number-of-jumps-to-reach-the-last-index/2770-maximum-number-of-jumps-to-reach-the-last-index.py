@@ -1,15 +1,47 @@
-def valid(num, target):
-    if -target <= num <= target : return True
-    
 class Solution:
     def maximumJumps(self, nums: List[int], target: int) -> int:
         n = len(nums)
-        dp = [-1] * n
-        dp[0] = 0
+        d = defaultdict(int)
 
-        for i in range(1, n):
-            for j in range(i):
-                if abs(nums[i] - nums[j]) <= target and dp[j] != -1:
-                    dp[i] = max(dp[i], dp[j] + 1)
+        if n == 1:
+            return 0
+        if n == 2:
+            temp = nums[1] - nums[0]
+            if temp >= -target and temp <= target:
+                return 1
+            return -1
         
-        return dp[-1]
+        d[n-1] = 0
+
+        for i in range(n-2 , -1, -1):
+            m=0
+            for j in range(i + 1, n):
+                temp = nums[i] - nums[j]
+                if (temp >= -target and temp <= target):
+                    if d[j] == 0 and j < n-1:
+                        m = max(m , 0)
+                    else:
+                        m = max(m, 1 + d[j])
+            d[i] = m
+            print(f"{i} \t\t {d[i]}")
+
+        if not d[0]:
+            return -1
+        return d[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
