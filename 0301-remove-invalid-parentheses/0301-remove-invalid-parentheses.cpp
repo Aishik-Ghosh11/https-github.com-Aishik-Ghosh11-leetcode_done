@@ -1,47 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
+    set<string> ans;
+
+    void dfs(string &s, int idx, int leftRem, int rightRem,
+             int balance, string cur) {
+
+        if (idx == s.size()) {
+            if (leftRem == 0 && rightRem == 0 && balance == 0)
+                ans.insert(cur);
+            return;
+        }
+
+        // Remove current parenthesis
+        if (s[idx] == '(' && leftRem > 0) {
+            dfs(s, idx + 1, leftRem - 1, rightRem,
+                balance, cur);
+        }
+
+        if (s[idx] == ')' && rightRem > 0) {
+            dfs(s, idx + 1, leftRem, rightRem - 1,
+                balance, cur);
+        }
+
+        // Keep current character
+        if (s[idx] == '(') {
+            dfs(s, idx + 1, leftRem, rightRem,
+                balance + 1, cur + '(');
+        }
+        else if (s[idx] == ')') {
+            if (balance > 0) {
+                dfs(s, idx + 1, leftRem, rightRem,
+                    balance - 1, cur + ')');
+            }
+        }
+        else {
+            dfs(s, idx + 1, leftRem, rightRem,
+                balance, cur + s[idx]);
+        }
+    }
+
     vector<string> removeInvalidParentheses(string s) {
-        vector<string> res;
-        forward(s, res, 0, 0);
 
-        return res;
-    }
+        int leftRem = 0;
+        int rightRem = 0;
 
-private:
-    void forward(string s, auto& res, int li, int lj) {
-        int bal = 0;
+        // Find minimum removals required
+        for (char c : s) {
 
-        for (int i = li; i < s.length(); i++) {
-            bal += (s[i] == '(') - (s[i] == ')');
+            if (c == '(') {
+                leftRem++;
+            }
+            else if (c == ')') {
 
-            if (bal >= 0) continue;
-
-            for (int j = lj; j <= i; j++)
-                if (s[j] == ')' && (j == lj || s[j - 1] != ')'))
-                    forward(s.substr(0, j) + s.substr(j + 1), res, i, j);
-
-            return;
+                if (leftRem > 0)
+                    leftRem--;
+                else
+                    rightRem++;
+            }
         }
 
-        backward(s, res, s.length() - 1, s.length() - 1);
-    }
+        dfs(s, 0, leftRem, rightRem, 0, "");
 
-    void backward(string s, auto& res, int ri, int rj) {
-        int bal = 0;
-
-        for (int i = ri; i >= 0; i--) {
-            bal += (s[i] == ')') - (s[i] == '(');
-
-            if (bal >= 0) continue;
-
-            for (int j = rj; j >= i; j--)
-                if (s[j] == '(' && (j == rj || s[j + 1] != '('))
-                    backward(s.substr(0, j) + s.substr(j + 1), res, i - 1,
-                             j - 1);
-
-            return;
-        }
-
-        res.push_back(s);
+        return vector<string>(ans.begin(), ans.end());
     }
 };
