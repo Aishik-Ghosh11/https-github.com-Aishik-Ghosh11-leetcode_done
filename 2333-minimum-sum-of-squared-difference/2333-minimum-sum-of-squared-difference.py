@@ -1,33 +1,29 @@
 class Solution:
     def minSumSquareDiff(self, nums1: List[int], nums2: List[int], k1: int, k2: int) -> int:
-        d = [0] * 100001
         k = k1 + k2
-        total = 0
-        mx = 0
+        gaps = [abs(a - b) for a, b in zip(nums1, nums2)]
 
-        # Step 1: count the differences
-        for a, b in zip(nums1, nums2):
-            x = abs(a - b)
-            d[x] += 1
-            total += x
-            mx = max(mx, x)
+        def feasible(mid):
+            return sum(max(gap - mid, 0) for gap in gaps) <= k
 
-        # Enough budget -> every difference becomes 0
-        if total <= k:
-            return 0
+        l, r = 0, max(gaps)
+        ans = r
+        while l <= r:
+            mid = (l + r) >> 1
+            if feasible(mid):
+                ans = mid
+                r = mid - 1
+            else:
+                l = mid + 1
 
-        # Step 2: shave the biggest differences, level by level
-        for i in range(mx, 0, -1):
-            if k <= 0:
+        rest_k = k - sum(max(g - ans, 0) for g in gaps)
+        gaps = [min(g, ans) for g in gaps]
+
+        for i in range(len(gaps)):
+            if rest_k == 0 or ans == 0:
                 break
-            move = min(k, d[i])
-            d[i] -= move
-            d[i - 1] += move
-            k -= move
+            if gaps[i] == ans:
+                gaps[i] -= 1
+                rest_k -= 1
 
-        # Step 3: add up the squares
-        ans = 0
-        for i in range(mx + 1):
-            ans += i * i * d[i]
-
-        return ans
+        return sum(g * g for g in gaps)
