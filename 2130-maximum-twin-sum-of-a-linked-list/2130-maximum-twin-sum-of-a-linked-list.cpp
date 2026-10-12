@@ -11,17 +11,22 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-        int res = 0;
-        ListNode* left = head;
-
-        auto dfs = [&](this auto& dfs, ListNode* right) -> void {
-            if (right->next) {
-                dfs(right -> next);
-            }
-            res = max(res , left->val + right->val);
-            left = left->next;
-        };
-        dfs(head);
-        return res;
+        ListNode* temp = head;
+        int n = 0;
+        while(temp) {
+            n++;
+            temp = temp->next;
+        }
+        temp = head;
+        vector<int> res(n, 0);
+        int idx = 0;
+        while (temp) {
+            int twin = n-1-idx;
+            int i = min(idx, twin);
+            res[i] += temp->val;
+            idx++;
+            temp = temp->next;
+        }
+        return *max_element(res.begin(), res.end());
     }
 };
