@@ -1,30 +1,35 @@
 class Solution {
 public:
-    int maxBuilding(int num, vector<vector<int>>& r) {
+    int maxBuilding(int n, vector<vector<int>>& restrictions) {
+        vector<vector<int>> r;
         r.push_back({1, 0});
+        for(const auto& elem:restrictions){
+            r.push_back({elem[0], elem[1]});
+        }
         sort(r.begin(), r.end());
-        int n = r.size();
+        if(r.back()[0]!=n){
+            r.push_back({n, n-1});
+        }
 
-        for (int i = 1; i < n; i++)
-            r[i][1] = yCap(r[i - 1], r[i]);
+        int m=r.size();
 
-        for (int i = n - 2; i >= 0; i--)
-            r[i][1] = yCap(r[i + 1], r[i]);
+        for(int i=1;i<m;i++){
+            int dist = r[i][0]-r[i-1][0];
+            r[i][1]=min(r[i][1], r[i-1][1]+dist);
+        }
+        for(int i=m-2;i>=0;i--){
+            int dist = r[i+1][0]-r[i][0];
+            r[i][1]=min(r[i][1], r[i+1][1]+dist);
+        }
 
-        int res = 0;
-        for (int i = 1; i < n; i++)
-            res = max(res, yPeak(r[i - 1], r[i]));
-
-        return max(res, r[n - 1][1] + num - r[n - 1][0]);
-    }
-
-    int yCap(vector<int>& l, vector<int>& r) {
-        int x1 = l[0], y1 = l[1], x2 = r[0], y2 = r[1];
-        return min(y2, y1 + abs(x2 - x1));
-    }
-
-    int yPeak(vector<int>& l, vector<int>& r) {
-        int x1 = l[0], y1 = l[1], x2 = r[0], y2 = r[1];
-        return (y1 + y2 + x2 - x1) >> 1;
+        int ans=0;
+        for(int i=1;i<m;i++){
+            int h1=r[i-1][1];
+            int h2=r[i][1];
+            int d=r[i][0]-r[i-1][0];
+            int candidate = (h1+h2+d)/2;
+            ans=max(ans, candidate);
+        }
+        return ans;
     }
 };
