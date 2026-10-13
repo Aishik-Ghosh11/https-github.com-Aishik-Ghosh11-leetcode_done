@@ -1,15 +1,17 @@
 class Solution:
     def maxAlternatingSum(self, nums: List[int]) -> int:
-        sq = [x * x for x in nums]
-        return sum(sq) - 2 * self.sum_smallest(sq, len(sq) // 2)
-    
-    def sum_smallest(self, a: list[int], k: int) -> int:
-        if k == 0:
-            return 0
-        pivot = random.choice(a)
-        lo = [x for x in a if x < pivot]
-        if k <= len(lo):
-            return self.sum_smallest(lo , k)
-        take = min(k - len(lo), a.count(pivot))
-        hi = [x for x in a if x > pivot]
-        return sum(lo) + take * pivot + self.sum_smallest(hi, k - len(lo) - take)
+        nums = [abs(n) for n in nums]
+        nums.sort()
+        score = 0
+        idx = 0
+
+        while idx < len(nums):
+            sq = nums[idx] * nums[idx]
+            if idx < int(len(nums)/2):
+                score -= sq
+            else:
+                score += sq
+            idx += 1
+        
+        return score
+        
