@@ -1,12 +1,26 @@
+#define ll long long
 class Solution {
 public:
-    long long maxAlternatingSum(vector<int>& nums) {
-        vector<long long> sq;
-        for (int x : nums) sq.push_back(1LL * x * x);
-        int h = sq.size() / 2;
-        nth_element(sq.begin(), sq.begin() + h, sq.end());  // quickselect: the smallest half in front, any order
-        long long total = accumulate(sq.begin(), sq.end(), 0LL);
-        long long small = accumulate(sq.begin(), sq.begin() + h, 0LL);
-        return total - 2 * small;  
+    long long maxAlternatingSum(vector<int>& v) {
+        ll ans=0;
+        for(int i=0;i<v.size();i++){
+            if(v[i]<0){
+                v[i]*=-1;
+            }
+        }
+        sort(v.rbegin(),v.rend());
+        int n=v.size();
+        int till=n/2;
+        if(n&1){
+            till++;
+        }
+        for(int i=0;i<till;i++){
+            ans+=v[i]*1ll*v[i];
+        }
+        for(int i=till;i<n;i++){
+            ans-=v[i]*1ll*v[i];
+        }
+        return ans;
+        
     }
 };
