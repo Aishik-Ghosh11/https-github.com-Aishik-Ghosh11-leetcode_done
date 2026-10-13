@@ -1,12 +1,12 @@
 class Solution {
 public:
     long long maxTotalValue(vector<int>& nums, int k) {
-        int gMin = nums.front() ,gMax = nums.front();
+        int n = nums.size();
+        long long ans = 0;
+        sort(nums.begin() , nums.end());
+        int value = nums[n-1] - nums[0];
 
-        for (auto& n : nums) {
-            gMin = min(gMin, n);
-            gMax = max(gMax, n);
-        }
-        return (long long)(gMax - gMin) * k;
+        ans = 1LL * value * k;
+        return ans;
     }
 };
