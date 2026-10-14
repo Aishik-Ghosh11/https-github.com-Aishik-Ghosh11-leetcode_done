@@ -13,46 +13,39 @@
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        unordered_map<int, TreeNode*> mp;
-        unordered_map<int, int> root;
+        int n = descriptions.size();
+        map<int, TreeNode*> mpp;
+        set<int> isNotRoot;
 
-        for (int i = 0; i < descriptions.size(); i++) {
+        for(auto it : descriptions){
+            int parent = it[0];
+            int child = it[1];
+            int isLeft = it[2];
 
-            // Create nodes if they do not exist
-            if (mp[descriptions[i][0]] == 0) {
-                TreeNode* temp = new TreeNode(descriptions[i][0]);
-                mp[descriptions[i][0]] = temp;
+            isNotRoot.insert(child);
+
+            if(mpp.find(parent) == mpp.end()) {
+                TreeNode* node = new TreeNode(parent);
+                mpp[parent] = node;
             }
 
-            if (mp[descriptions[i][1]] == 0) {
-                TreeNode* temp = new TreeNode(descriptions[i][1]);
-                mp[descriptions[i][1]] = temp;
+             if(mpp.find(child) == mpp.end()) {
+                TreeNode* node = new TreeNode(child);
+                mpp[child] = node;
             }
 
-            // Connect parent and child
-            if (descriptions[i][2] == 1) {
-                mp[descriptions[i][0]]->left = mp[descriptions[i][1]];
-            } else {
-                mp[descriptions[i][0]]->right = mp[descriptions[i][1]];
-            }
-
-            // Track root candidates
-            if (root[descriptions[i][0]] != -1) {
-                root[descriptions[i][0]] = 1;
-            }
-
-            root[descriptions[i][1]] = -1;
+            if(isLeft) {
+                mpp[parent]->left = mpp[child];
+            } else mpp[parent]->right = mpp[child];
         }
 
-        int value = 0;
-
-        for (auto &it : root) {
-            if (it.second == 1) {
-                value = it.first;
-                break;
+        
+        for(int i=0;i<n;i++) {
+            if(isNotRoot.find(descriptions[i][0]) == isNotRoot.end()){
+                return mpp[descriptions[i][0]];
             }
         }
 
-        return mp[value];
+        return nullptr;
     }
 };
