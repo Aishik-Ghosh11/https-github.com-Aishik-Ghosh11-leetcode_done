@@ -5,51 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def createBinaryTree(self, desc: list[list[int]]) -> TreeNode | None:
-        acha = {}
-        root = set()
-        for i in range(len(desc)):
-            root.add(desc[i][0])
-        for p,c,l in desc:
-            if c in root:
-                root.remove(c)
-            if p not in acha:
-                acha[p] = [-1 , -1]
-            acha[p][l] = c
-        print(acha)
-        print(root)
+    def createBinaryTree(self, desc: list[list[int]]) -> Optional[TreeNode] | None:
+        nodes = [None] * 100001
+        root = None
 
-        def dfs(node):
-            if node not in acha:
-                return TreeNode(node)
-            newNode = TreeNode(node)
-            if acha[node][0] != -1:
-                newNode.right = dfs(acha[node][0])
-            if acha[node][1] != -1:
-                newNode.left = dfs(acha[node][1])
-            return newNode
-        return dfs(list(root)[0])
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        for _, v, _ in desc:
+            nodes[v] = TreeNode(v)
+        for u, v, left in desc:
+            if nodes[u] is None:
+                nodes[u] = TreeNode(u)
+                root = nodes[u]
+            if left == 1:
+                nodes[u].left = nodes[v]
+            else:
+                nodes[u].right = nodes[v]
+    
+        return root
 
 
