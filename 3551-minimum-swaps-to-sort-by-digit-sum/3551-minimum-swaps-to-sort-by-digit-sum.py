@@ -1,26 +1,27 @@
-class Pair:
-    def __init__(self, d, val, idx):
-        self.dsum = d
-        self.val = val
-        self.idx = idx
-
 class Solution:
-    def digitSum(self, num):
-        return sum(int(d) for d in str(num))
-
-    def minSwaps(self, nums):
+    def minSwaps(self, nums: List[int]) -> int:
+        for i, num in enumerate(nums):
+            curr = num
+            digit_sum = 0
+            while curr:
+                digit_sum += curr % 10
+                curr //= 10
+            nums[i] = (digit_sum, num, i)
+        nums.sort()
+        nums = [num[2] for num in nums]
         n = len(nums)
-        pairs = [Pair(self.digitSum(nums[i]), nums[i], i) for i in range(n)]
+        visited = [False] * n
+        cycle = 0
 
-        pairs.sort(key=lambda x: (x.dsum, x.val))
-
-        i = 0
-        cnt = 0
-        while i < n:
-            if pairs[i].idx != i:
-                cnt += 1
-                j = pairs[i].idx
-                pairs[i], pairs[j] = pairs[j], pairs[i]
-            else:
-                i += 1
-        return cnt
+        for i, num in enumerate(nums):
+            if visited[i]:
+                continue
+            
+            cycle += 1
+            j = i
+            while not visited[j]:
+                visited[j] = True
+                j = nums[j]
+        print(n, cycle)
+            
+        return n - cycle
