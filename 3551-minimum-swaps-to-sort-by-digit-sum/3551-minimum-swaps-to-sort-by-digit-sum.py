@@ -1,14 +1,26 @@
+class Pair:
+    def __init__(self, d, val, idx):
+        self.dsum = d
+        self.val = val
+        self.idx = idx
+
 class Solution:
-    def minSwaps(self, nums: List[int]) -> int:
-        digit_sum = lambda x: sum(map(int, str(x)))
-        rank = {x: k for k, x in enumerate(sorted(nums, key=lambda x: (digit_sum(x), x)))}  # final position of each value
-        home = [rank[x] for x in nums]  # where the value at each position must go
+    def digitSum(self, num):
+        return sum(int(d) for d in str(num))
 
-        swaps = 0
-        for i in range(len(home)):
-            while home[i] != i:  # send the value at i home, take that spot's value in exchange
-                j = home[i]
-                home[i], home[j] = home[j], home[i]
-                swaps += 1
+    def minSwaps(self, nums):
+        n = len(nums)
+        pairs = [Pair(self.digitSum(nums[i]), nums[i], i) for i in range(n)]
 
-        return swaps
+        pairs.sort(key=lambda x: (x.dsum, x.val))
+
+        i = 0
+        cnt = 0
+        while i < n:
+            if pairs[i].idx != i:
+                cnt += 1
+                j = pairs[i].idx
+                pairs[i], pairs[j] = pairs[j], pairs[i]
+            else:
+                i += 1
+        return cnt
