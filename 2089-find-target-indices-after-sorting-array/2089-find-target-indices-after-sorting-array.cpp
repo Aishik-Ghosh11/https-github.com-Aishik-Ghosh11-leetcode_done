@@ -1,12 +1,22 @@
 class Solution {
 public:
     vector<int> targetIndices(vector<int>& nums, int target) {
-        int left = ranges::count_if(nums, [&](int x) {return x < target; });
-        int right = ranges::count_if(nums, [&](int x) {return x <= target; });
-    
-        vector<int> indices(right - left);
-        iota(indices.begin(), indices.end(), left);
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        int n = nums.size();
+        for (int i=0; i<n; i++) {
+            pq.push({nums[i], i});
+        }
+        int i=0;
+        vector<int> ans;
 
-        return indices;
+        while (!pq.empty() && i<n) {
+            auto m=pq.top();
+            pq.pop();
+            if (m.first == target) {
+                ans.push_back(i);
+            }
+            i++;
+        }
+        return ans;
     }
 };
