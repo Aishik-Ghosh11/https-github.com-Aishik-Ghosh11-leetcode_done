@@ -1,10 +1,16 @@
 class Solution:
     def sortPermutation(self, nums: List[int]) -> int:
-        k = -1
-        for i,x in enumerate(nums):
-            if x != i:
-                k &= x
-                if not k:
-                    return 0
+        n = len(nums)
+        out_of_order = []
+        for i in range(n):
+            if nums[i] != i:
+                out_of_order.append(i)
         
-        return max(k, 0)
+        if not out_of_order:
+            return 0
+        
+        prev = out_of_order[0]
+        for i in range(1, len(out_of_order)):
+            prev = out_of_order[i] & prev
+        
+        return prev
