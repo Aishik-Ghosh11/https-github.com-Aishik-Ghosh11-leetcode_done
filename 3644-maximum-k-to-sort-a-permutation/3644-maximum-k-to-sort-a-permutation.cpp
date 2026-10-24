@@ -1,14 +1,30 @@
 class Solution {
 public:
     int sortPermutation(vector<int>& nums) {
-        vector<int> arr = nums;
-        sort(arr.begin(), arr.end());
-        int n = arr.size();
-        int val = INT_MAX;
-        for (int i=0; i<n; i++) {
-            if (arr[i] != nums[i])
-                val = val & nums[i];
+        vector<int> temp;
+        for(int i=0; i<nums.size(); i += 1) {
+            if (nums[i] != i) {
+                temp.push_back(nums[i]);
+            }
         }
-        return val == INT_MAX?0:val;
+        
+        int ans = 0;
+        vector<int> sbits(32 , 0);
+        for (int i=0; i < temp.size(); i++) {
+            for(int j=0; j < 31; j++) {
+                if((1 << j) & temp[i]) {
+                    sbits[j] += 1;
+                }
+            }
+        }
+        if(temp.size() == 0) return 0;
+
+        for(int i=0;i<32;i+=1){
+            if(sbits[i]==temp.size()){
+                ans+=(1<<i);
+            }
+        }
+
+        return ans;
     }
 };
