@@ -145,6 +145,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [3524-find-x-value-of-array-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3524-find-x-value-of-array-i) |
 | [3559-number-of-ways-to-assign-edge-weights-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3559-number-of-ways-to-assign-edge-weights-ii) |
 | [3620-network-recovery-pathways](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3620-network-recovery-pathways) |
+| [3665-twisted-mirror-path-count](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3665-twisted-mirror-path-count) |
 | [3700-number-of-zigzag-arrays-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3700-number-of-zigzag-arrays-ii) |
 | [3751-total-waviness-of-numbers-in-range-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3751-total-waviness-of-numbers-in-range-i) |
 | [3753-total-waviness-of-numbers-in-range-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3753-total-waviness-of-numbers-in-range-ii) |
@@ -275,6 +276,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [3619-count-islands-with-total-value-divisible-by-k](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3619-count-islands-with-total-value-divisible-by-k) |
 | [3620-network-recovery-pathways](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3620-network-recovery-pathways) |
 | [3644-maximum-k-to-sort-a-permutation](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3644-maximum-k-to-sort-a-permutation) |
+| [3665-twisted-mirror-path-count](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3665-twisted-mirror-path-count) |
 | [3689-maximum-total-subarray-value-i](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3689-maximum-total-subarray-value-i) |
 | [3702-longest-subsequence-with-non-zero-bitwise-xor](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3702-longest-subsequence-with-non-zero-bitwise-xor) |
 | [3718-smallest-missing-multiple-of-k](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3718-smallest-missing-multiple-of-k) |
@@ -542,6 +544,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [3286-find-a-safe-walk-through-a-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3286-find-a-safe-walk-through-a-grid) |
 | [3568-minimum-moves-to-clean-the-classroom](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3568-minimum-moves-to-clean-the-classroom) |
 | [3619-count-islands-with-total-value-divisible-by-k](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3619-count-islands-with-total-value-divisible-by-k) |
+| [3665-twisted-mirror-path-count](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3665-twisted-mirror-path-count) |
 | [3882-minimum-xor-path-in-a-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/3882-minimum-xor-path-in-a-grid) |
 ## Enumeration
 |  |
