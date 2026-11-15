@@ -1,15 +1,25 @@
 class Solution:
     def generateMatrix(self, n: int) -> list[list[int]]:
-        x, y , dx , dy = 0, 0, 1, 0
-        res = [[0 for _ in range(n)] for _ in range(n)]
-
-        for i in range(n * n):
-            res[y][x] = i + 1
-
-            if not 0 <= x + dx < n or not 0 <= y + dy < n or res[y + dy][x + dx] != 0:
-                dx, dy = -dy, dx
-            
-            x += dx
-            y += dy
-        
-        return res
+        ans=[[0]* n for _ in range(n)]
+        top,bottom,left,right=0,n-1,0,n-1
+        ele=1
+        while top<=bottom and left<=right:
+            for _ in range(left,right+1):
+                ans[top][_]=ele
+                ele+=1
+            top+=1
+            for _ in range(top,bottom+1):
+                ans[_][right]=ele
+                ele+=1
+            right-=1
+            if top<=bottom:
+                for _ in range(right,left-1,-1):
+                    ans[bottom][_]=ele
+                    ele+=1
+                bottom-=1
+            if left<=right:
+                for _ in range(bottom,top-1,-1):
+                    ans[_][left]=ele
+                    ele+=1
+                left+=1
+        return ans
