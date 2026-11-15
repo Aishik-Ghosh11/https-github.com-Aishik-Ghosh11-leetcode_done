@@ -206,6 +206,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0053-maximum-subarray](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0053-maximum-subarray) |
 | [0055-jump-game](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0055-jump-game) |
 | [0056-merge-intervals](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0056-merge-intervals) |
+| [0059-spiral-matrix-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0059-spiral-matrix-ii) |
 | [0063-unique-paths-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0063-unique-paths-ii) |
 | [0462-minimum-moves-to-equal-array-elements-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0462-minimum-moves-to-equal-array-elements-ii) |
 | [0486-predict-the-winner](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0486-predict-the-winner) |
@@ -464,6 +465,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Simulation
 |  |
 | ------- |
+| [0059-spiral-matrix-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0059-spiral-matrix-ii) |
 | [1260-shift-2d-grid](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1260-shift-2d-grid) |
 | [1545-find-kth-bit-in-nth-binary-string](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1545-find-kth-bit-in-nth-binary-string) |
 | [1606-find-servers-that-handled-most-number-of-requests](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1606-find-servers-that-handled-most-number-of-requests) |
@@ -563,6 +565,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | ------- |
 | [0036-valid-sudoku](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0036-valid-sudoku) |
 | [0037-sudoku-solver](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0037-sudoku-solver) |
+| [0059-spiral-matrix-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0059-spiral-matrix-ii) |
 | [0063-unique-paths-ii](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0063-unique-paths-ii) |
 | [0835-image-overlap](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/0835-image-overlap) |
 | [1254-number-of-closed-islands](https://github.com/Aishik-Ghosh11/https-github.com-Aishik-Ghosh11-leetcode_done/tree/master/1254-number-of-closed-islands) |
